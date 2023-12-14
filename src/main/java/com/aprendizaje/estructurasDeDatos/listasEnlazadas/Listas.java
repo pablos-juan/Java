@@ -45,6 +45,5 @@ public class Listas {
             nuevoNodo.siguiente = puntero.siguiente;
             puntero.siguiente = nuevoNodo;
         }
-
     }
 }
