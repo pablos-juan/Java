@@ -30,3 +30,4 @@ Una lista enlazada es una estructura de datos lineal que consiste en una secuenc
 - El acceso aleatorio a los elementos es menos eficiente.
 
 En resumen, las listas enlazadas son estructuras de datos flexibles y dinámicas que pueden ser útiles en situaciones donde se necesitan operaciones frecuentes de inserción o eliminación de elementos en medio de la secuencia.
+
