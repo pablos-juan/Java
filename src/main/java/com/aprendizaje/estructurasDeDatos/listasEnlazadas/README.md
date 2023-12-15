@@ -29,7 +29,9 @@ Una lista enlazada es una estructura de datos lineal que consiste en una secuenc
 - Requieren más espacio de almacenamiento debido a los enlaces.
 - El acceso aleatorio a los elementos es menos eficiente.
 
-En Java, la estructura básica de un nodo para una lista simplemente enlazada podría ser algo así:
+## Estructura
+
+En Java, la estructura básica de un nodo para una lista simplemente enlazada podría verse así:
 
 ~~~java
 public class Nodo {
@@ -65,9 +67,11 @@ public class Lista {
 Agregar algo como esto puede ayudar a obtener rapidamente la longitud de una lista sin, la necesidad de recorrer la lista cada vez que se solicite una consulta de este tipo. 
 
 ## Agregar elementos 
+
 La adición de elementos a una lista enlazada implica la creación de un nuevo nodo y la actualización de los enlaces apropiados. A continuación, se muestra un ejemplo de cómo agregar un nuevo nodo al final de una lista simplemente enlazada:
 
 ### Agregar al inicio
+
 1. Crear un nuevo nodo con el dato que desea insertar. 
 2. Establecer el puntero del nuevo nodo para que apunte al nodo que actualmente es la cabeza de la lista.
 3. Si la cabeza está vacía tiene un valor `null`. Apuntar la cabeza hacia el nuevo nodo para establecerlo como el inicio de la lista.
@@ -88,6 +92,7 @@ public void insertarPrincipio(Libro libro) {
 Dentro de la estructura nodo suele añadirse otro nodo con valor nulo, este nodo indica el fin de la lista. 
 
 ### Agregar al final
+
 Para realizar una inserción al final, se requiere recorrer la lista. Además de crear un nuevo nodo que contendrá el objeto añadido a la lista, es necesario introducir un nodo especial conocido como puntero. Este puntero, que refleja el elemento actual, inicialmente apuntará hacia la cabeza de la lista.
 
 1. Inicialmente, el puntero señalará la cabeza. La cabeza siempre es el primer elemento de una LinkedList.
@@ -119,13 +124,71 @@ public void insertarFinal(Libro libro) { //recorrer la lista
 ~~~
 
 ### Agregar después de un elemento
+
 El mecanismo para insertar un objeto dentro de una lista enlazada podría resumirse en recorrer la lista, encontrar la posición y reorganizar los punteros.
 
+1. Después de recorrer la lista el puntero se detendrá en la posición anterior al nodo donde se desea realizar la inserción, en este caso, el nodo 2.
+2. Encontrada la posición, el puntero del nodo nuevo debe apuntar hacia el nodo 2.
+Esto se logra asignando la posición siguiente del puntero a la posición siguiente del puntero. 
+3. Una vez esté conectado el nuevo nodo por la derecha, deben configurarse los punteros del nodo anterior (en este caso el nodo 1) para que apunten hacia el nodo nuevo: el puntero siguiente del nodo 1 será el nuevo nodo.
+
+~~~Java
+//insertar despues del libro en la posición n
+public void insertarDespues(int n, Libro libro) {
+    Nodo nuevoNodo = new Nodo(libro);
+    //comprobar si la lista está vacía
+    if (cabeza == null) {
+        cabeza = nuevoNodo;
+        longitud++;
+    } else {
+        Nodo puntero = cabeza;
+        //contador indica la posicion del libro al que señala
+        //el puntero
+        int contador = 0;
+        while (puntero.siguiente != null && contador < n) {
+            puntero = puntero.siguiente;
+            contador++;
+        }
+        //conectar el nuevo nodo con el nodo de la derecha
+        nuevoNodo.siguiente = puntero.siguiente;
+        //connectar el nuevo nodo por la izquierda
+        puntero.siguiente = nuevoNodo;
+        longitud++;
+    }
+}
+~~~
+
 Además de crear un nuevo nodo es necesario comprobar dos casos extremos, si la lista está vacía o si el elemento será insertado en la posición 0.
-En el primer caso, el nuevo nodo será asignado a la cabeza directamente.
-En el otro caso debe insertarse el elemento siguiendo las instrucciones que se usan para insertar al inicio. Incluso, de tener el método en la misma clase puede usarse dentro de la función para realizar la inserción.
+- En el primer caso, el nuevo nodo será asignado a la cabeza directamente.
+- En el otro caso debe insertarse el elemento siguiendo las instrucciones que se usan para insertar al inicio. Incluso, de tener el método en la misma clase puede usarse dentro de la función para realizar la inserción.
 
 ## Eliminar elementos
 
-En resumen, las listas enlazadas son estructuras de datos flexibles y dinámicas que pueden ser útiles en situaciones donde se necesitan operaciones frecuentes de inserción o eliminación de elementos en medio de la secuencia.
+La eliminación de elementos en una lista enlazada implica modificar los enlaces entre los nodos. A continuación, se muestra un ejemplo de cómo eliminar un nodo específico de una lista simplemente enlazada:
 
+### Eliminar primer elemento
+
+Para eliminar el primer elemento de una lista enlazada debe reemplazarse el primer elemento de la lista por su siguiente. Basicamente debe crearse un nodo nuevo y asignarlo como `cabeza`, hecho esto se actualiza la `cabeza` para que apunte al segundo nodo.  
+
+~~~Java
+//eliminar el primer elemento de la lista
+public void eliminarPrincipio() {
+    if (cabeza != null) {
+        Nodo primerNodo = cabeza;
+        //reasignar la cabeza de la lista
+        cabeza = cabeza.siguiente;
+        //reasignar el puntero siguiente de nodo a eliminar
+        //para que apunte a null
+        primerNodo.siguiente = null;
+        longitud--;
+    }
+}
+~~~
+
+### Eliminar último elemento
+
+Para eliminar el último elemento de una lista enlazada, se debe recorrer la lista hasta llegar al penúltimo elemento y eliminar el enlace que apunta hacia el último nodo.
+
+Además, debe comprobar si la lista está vacía o si solo tiene un elemento. Si la lista está vacía y 
+
+En resumen, las listas enlazadas son estructuras de datos flexibles y dinámicas que pueden ser útiles en situaciones donde se necesitan operaciones frecuentes de inserción o eliminación de elementos en medio de la secuencia.
