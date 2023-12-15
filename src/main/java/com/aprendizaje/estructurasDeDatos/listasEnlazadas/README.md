@@ -1,22 +1,22 @@
-## Listas Enlazadas
+# Listas Enlazadas
 
 Una lista enlazada es una estructura de datos lineal que consiste en una secuencia de nodos, donde cada nodo contiene un valor y una referencia (o enlace) al siguiente nodo en la secuencia. A diferencia de los arrays o listas estáticas, las listas enlazadas no tienen un tamaño fijo, y los elementos pueden ser fácilmente insertados o eliminados en cualquier posición.
 
-### Lista Simplemente Enlazada (Singly Linked List)
+## Lista Simplemente Enlazada (Singly Linked List)
 
 - Cada nodo tiene un enlace que apunta al siguiente nodo en la secuencia.
 - El último nodo apunta a `null`.
 
-### Lista Doblemente Enlazada (Doubly Linked List)
+## Lista Doblemente Enlazada (Doubly Linked List)
 
 - Cada nodo tiene dos enlaces: uno que apunta al siguiente nodo y otro que apunta al nodo anterior.
 - El primer nodo y el último nodo apuntan a `null` en sus enlaces respectivos.
 
-### Lista Circular Simplemente Enlazada
+## Lista Circular Simplemente Enlazada
 
 - Similar a la lista simplemente enlazada, pero el enlace del último nodo apunta al primer nodo, creando un ciclo.
 
-### Lista Circular Doblemente Enlazada
+## Lista Circular Doblemente Enlazada
 
 - Similar a la lista doblemente enlazada, pero el enlace del último nodo apunta al primer nodo y el enlace del primer nodo apunta al último nodo.
 
@@ -28,6 +28,104 @@ Una lista enlazada es una estructura de datos lineal que consiste en una secuenc
 **Desventajas:**
 - Requieren más espacio de almacenamiento debido a los enlaces.
 - El acceso aleatorio a los elementos es menos eficiente.
+
+En Java, la estructura básica de un nodo para una lista simplemente enlazada podría ser algo así:
+
+~~~java
+public class Nodo {
+    public int dato; // O cualquier tipo de dato que desees almacenar
+    public Nodo siguiente; // Enlace al siguiente nodo
+
+    public Nodo(int dato) {
+        this.dato = dato;
+        this.siguiente = null; // Inicialmente, no hay nodo siguiente
+    }
+}
+~~~
+
+Puede resultar útil implementar una estructura llamada Lista. Este tipo de estructura puede guardar la cabeza o la longitud de la lista. Por ejemplo:
+
+~~~java
+public class Lista {
+    Nodo cabeza = null;
+    int longitud = 0;
+
+    public class Nodo {
+        public int dato; // O cualquier tipo de dato que desees almacenar
+        public Nodo siguiente; // Enlace al siguiente nodo
+
+        public Nodo(int dato) {
+            this.dato = dato;
+            this.siguiente = null; // Inicialmente, no hay nodo siguiente
+        }
+    }
+}
+~~~
+
+Agregar algo como esto puede ayudar a obtener rapidamente la longitud de una lista sin, la necesidad de recorrer la lista cada vez que se solicite una consulta de este tipo. 
+
+## Agregar elementos 
+La adición de elementos a una lista enlazada implica la creación de un nuevo nodo y la actualización de los enlaces apropiados. A continuación, se muestra un ejemplo de cómo agregar un nuevo nodo al final de una lista simplemente enlazada:
+
+### Agregar al inicio
+1. Crear un nuevo nodo con el dato que desea insertar. 
+2. Establecer el puntero del nuevo nodo para que apunte al nodo que actualmente es la cabeza de la lista.
+3. Si la cabeza está vacía tiene un valor `null`. Apuntar la cabeza hacia el nuevo nodo para establecerlo como el inicio de la lista.
+
+~~~Java
+public void insertarPrincipio(Libro libro) {
+    //crear un nodo nuevo que conteanga un libro
+    Nodo nuevoNodo = new Nodo(libro);
+    //configurar el puntero para que apunte
+    //al nodo que es cabeza de la lista
+    nuevoNodo.siguiente = cabeza;
+    //asignar el nuevo nodo como cabeza
+    cabeza = nuevoNodo;
+    longitud++;
+}
+~~~
+
+Dentro de la estructura nodo suele añadirse otro nodo con valor nulo, este nodo indica el fin de la lista. 
+
+### Agregar al final
+Para realizar una inserción al final, se requiere recorrer la lista. Además de crear un nuevo nodo que contendrá el objeto añadido a la lista, es necesario introducir un nodo especial conocido como puntero. Este puntero, que refleja el elemento actual, inicialmente apuntará hacia la cabeza de la lista.
+
+1. Inicialmente, el puntero señalará la cabeza. La cabeza siempre es el primer elemento de una LinkedList.
+2. Mediante un bucle el puntero seguirá moviéndose hasta que el nodo siguiente al que está apuntado tenga un valor nulo, esto refleja el final de la lista.
+3. Cuando el bucle encuentre el final de la lista, inserte el nuevo nodo. Para esto, configure el apuntador del último nodo para que apunte hacia el nuevo nodo.
+
+~~~Java
+public void insertarFinal(Libro libro) { //recorrer la lista
+    //crear nueva lista
+    Nodo nodoNuevo = new Nodo(libro);
+    //verificar si la lista está vacía
+    if (cabeza == null) {
+        //si está vacía el nuevo nodo es ahora la cabeza
+        cabeza = nodoNuevo;
+        longitud++;
+    } else {
+        //nodo especial, inicializar en cabeza
+        Nodo puntero = cabeza;
+        //puntero avanza mientras el nodo siguiente no sea nulo
+        while (puntero.siguiente != null) {
+            puntero = puntero.siguiente;
+        }
+        //configurar puntero del último nodo para que ahora
+        //apunte al nuevo nodo
+        puntero.siguiente = nodoNuevo;
+        longitud++;
+    }
+}
+~~~
+
+### Agregar después de un elemento
+El mecanismo para insertar un objeto dentro de una lista enlazada podría resumirse en recorrer la lista, encontrar la posición y reorganizar los punteros.
+
+Además de crear un nuevo nodo es necesario comprobar dos casos extremos, si la lista está vacía o si el elemento será insertado en la posición 0.
+En el primer caso, el nuevo nodo será asignado a la cabeza directamente.
+En el otro caso debe insertarse el elemento siguiendo las instrucciones que se usan para insertar al inicio. Incluso, de tener el método en la misma clase puede usarse dentro de la función para realizar la inserción.
+
+## Eliminar elementos
 
 En resumen, las listas enlazadas son estructuras de datos flexibles y dinámicas que pueden ser útiles en situaciones donde se necesitan operaciones frecuentes de inserción o eliminación de elementos en medio de la secuencia.
 
