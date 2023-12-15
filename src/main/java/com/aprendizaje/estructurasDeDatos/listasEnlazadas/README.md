@@ -1,22 +1,22 @@
-# Listas Enlazadas
+# Listas enlazadas
 
 Una lista enlazada es una estructura de datos lineal que consiste en una secuencia de nodos, donde cada nodo contiene un valor y una referencia (o enlace) al siguiente nodo en la secuencia. A diferencia de los arrays o listas estáticas, las listas enlazadas no tienen un tamaño fijo, y los elementos pueden ser fácilmente insertados o eliminados en cualquier posición.
 
-## Lista Simplemente Enlazada (Singly Linked List)
+## Lista simplemente enlazada (Singly Linked List)
 
 - Cada nodo tiene un enlace que apunta al siguiente nodo en la secuencia.
 - El último nodo apunta a `null`.
 
-## Lista Doblemente Enlazada (Doubly Linked List)
+## Lista doblemente enlazada (Doubly Linked List)
 
 - Cada nodo tiene dos enlaces: uno que apunta al siguiente nodo y otro que apunta al nodo anterior.
 - El primer nodo y el último nodo apuntan a `null` en sus enlaces respectivos.
 
-## Lista Circular Simplemente Enlazada
+## Lista circular simplemente enlazada
 
 - Similar a la lista simplemente enlazada, pero el enlace del último nodo apunta al primer nodo, creando un ciclo.
 
-## Lista Circular Doblemente Enlazada
+## Lista circular doblemente enlazada
 
 - Similar a la lista doblemente enlazada, pero el enlace del último nodo apunta al primer nodo y el enlace del primer nodo apunta al último nodo.
 
@@ -189,6 +189,55 @@ public void eliminarPrincipio() {
 
 Para eliminar el último elemento de una lista enlazada, se debe recorrer la lista hasta llegar al penúltimo elemento y eliminar el enlace que apunta hacia el último nodo.
 
-Además, debe comprobar si la lista está vacía o si solo tiene un elemento. Si la lista está vacía y 
+~~~Java
+public void eliminarUltimo() {
+    if (estaVacia()) return;
+    //si la lista solo tiene un elemento
+    if (cabeza.siguiente == null) {
+        cabeza = null;
+    } else {
+        Nodo puntero = cabeza;
+        //recorrer la lista hasta encontrar el penúltimo elemento
+        //cuando siguiente del siguiente sea igual a null
+        // puntero -> ° -> null
+        while (puntero.siguiente.siguiente != null) {
+            puntero = puntero.siguiente;
+        }
+        puntero.siguiente = null;
+        longitud--;
+    }
+}
+~~~
 
-En resumen, las listas enlazadas son estructuras de datos flexibles y dinámicas que pueden ser útiles en situaciones donde se necesitan operaciones frecuentes de inserción o eliminación de elementos en medio de la secuencia.
+Claro, aquí tienes una versión mejorada del texto:
+
+"Además, es necesario verificar si la lista está vacía o si contiene únicamente un elemento. Si la lista está vacía o solo tiene un elemento, se procede a asignar `null` a la cabeza. En el caso de que la lista contenga solo un elemento, se realiza esta asignación para vaciar la lista; en caso contrario, el método se detiene si la lista está vacía."
+
+## Cuando debería utilizar una Linked List?
+
+Aquí hay algunas situaciones en las que podría considerar el uso de una lista enlazada en lugar de otras estructuras de datos en Java, como matrices o ArrayLists:
+
+- **Inserción y eliminación frecuente en medio de la lista:**
+Las listas enlazadas son eficientes para la inserción y eliminación de elementos en cualquier posición de la lista, ya que solo se requiere cambiar las referencias de los nodos cercanos, en lugar de desplazar elementos como en una matriz.
+
+- **Tamaño dinámico:**
+Las listas enlazadas no tienen un tamaño fijo como las matrices, lo que significa que pueden crecer o reducirse dinámicamente según sea necesario sin necesidad de copiar elementos.
+
+- **Uso eficiente de memoria:**
+Las listas enlazadas pueden ser más eficientes en términos de memoria en comparación con las matrices, especialmente cuando el tamaño de la lista es desconocido de antemano y puede cambiar.
+
+- **Acceso secuencial:**
+Si va a acceder a los elementos de la lista de manera secuencial, una lista enlazada puede ser una buena elección, ya que permite un acceso rápido a los elementos siguientes.
+
+- **Estructuras de datos anidadas:**
+Puede ser útil cuando se necesitan estructuras de datos anidadas o cuando se construyen estructuras de datos más complejas.
+
+Sin embargo, hay algunas consideraciones importantes a tener en cuenta:
+
+- **Acceso aleatorio más lento:**
+Las listas enlazadas no ofrecen un acceso aleatorio eficiente como lo hace una matriz. Si necesita acceder a elementos de manera aleatoria con frecuencia, una lista enlazada puede no ser la mejor opción.
+
+- **Uso de memoria adicional:**
+Las listas enlazadas pueden consumir más memoria debido a las referencias adicionales que se almacenan junto con los datos.
+
+Las listas enlazadas son estructuras de datos flexibles y dinámicas que pueden ser útiles en situaciones donde se necesitan operaciones frecuentes de inserción o eliminación de elementos en medio de la secuencia.
