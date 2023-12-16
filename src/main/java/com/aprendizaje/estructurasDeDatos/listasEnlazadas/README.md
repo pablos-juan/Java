@@ -213,6 +213,45 @@ Claro, aquí tienes una versión mejorada del texto:
 
 "Además, es necesario verificar si la lista está vacía o si contiene únicamente un elemento. Si la lista está vacía o solo tiene un elemento, se procede a asignar `null` a la cabeza. En el caso de que la lista contenga solo un elemento, se realiza esta asignación para vaciar la lista; en caso contrario, el método se detiene si la lista está vacía."
 
+### Eliminar un elemento en una posicion `n`
+
+Primeramente, debe asegurarse que la lista no esté vacía o que la posición del libro a eliminar esté dentro de la lista, si alguna de éstas dos condiciones es verdadera no es posible eliminar el elemento. 
+
+~~~Java
+public void eliminarLibro(int n) {
+    if (cabeza == null || n >= longitud) return;
+    if (n == 0) {
+        //eliminarPrincipio();
+        Nodo primerNodo = cabeza;
+        cabeza = primerNodo.siguiente;
+        primerNodo.siguiente = null;
+        longitud--;
+    } else {
+        Nodo puntero = cabeza;
+        int contador = 0;
+        //avanzar hasta encontrar el elemento anterior al que
+        //debe eliminarse
+        while (puntero.siguiente != null && contador < (n - 1)) {
+            puntero = puntero.siguiente;
+            contador++;
+        }
+        //guarde el elemento a eliminar en un nodo temporal
+        //en este caso es el siguiente del puntero
+        Nodo temp = puntero.siguiente;
+        //asgine el siguiente del puntero al siguiente del nodo temporal
+        //puntero -> nodoEliminar -> nodo
+        puntero.siguiente = temp.siguiente;
+        //elimine el puntero del nodo temporal
+        temp.siguiente = null;
+        //puntero -> nodo
+        longitud--;
+    }
+}
+~~~
+
+Si la posición `n` es 0, significa que deseas eliminar el primer elemento de la lista. En este caso, simplemente actualiza la cabeza para que apunte al siguiente nodo.
+
+
 ## Cuando debería utilizar una Linked List?
 
 Aquí hay algunas situaciones en las que podría considerar el uso de una lista enlazada en lugar de otras estructuras de datos en Java, como matrices o ArrayLists:
