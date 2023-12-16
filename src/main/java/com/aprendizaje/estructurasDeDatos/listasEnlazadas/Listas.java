@@ -139,24 +139,25 @@ public class Listas {
             cabeza = primerNodo.siguiente;
             primerNodo.siguiente = null;
             longitud--;
+        } else {
+            Nodo puntero = cabeza;
+            int contador = 0;
+            //avanzar hasta encontrar el elemento anterior al que
+            //debe eliminarse
+            while (puntero.siguiente != null && contador < (n - 1)) {
+                puntero = puntero.siguiente;
+                contador++;
+            }
+            //guarde el elemento a eliminar en un nodo temporal
+            //en este caso es el siguiente del puntero
+            Nodo temp = puntero.siguiente;
+            //asgine el siguiente del puntero al siguiente del nodo temporal
+            //puntero -> nodoEliminar -> nodo
+            puntero.siguiente = temp.siguiente;
+            //elimine el puntero del nodo temporal
+            temp.siguiente = null;
+            //puntero -> nodo
+            longitud--;
         }
-        Nodo puntero = cabeza;
-        int contador = 0;
-        //avanzar hasta encontrar el elemento anterior al que
-        //debe eliminarse
-        while (puntero.siguiente != null && contador < (n-1)) {
-            puntero = puntero.siguiente;
-            contador++;
-        }
-        //guarde el elemento a eliminar en un nodo temporal
-        //en este caso es el siguiente del puntero
-        Nodo temp = puntero.siguiente;
-        //asgine el siguiente del puntero al siguiente del nodo temporal
-        //puntero -> nodoEliminar -> nodo
-        puntero.siguiente = temp.siguiente;
-        //elimine el puntero del nodo temporal
-        temp.siguiente = null;
-        //puntero -> nodo
-        longitud--;
     }
 }
