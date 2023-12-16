@@ -30,11 +30,11 @@ public class Switch {
         };
 
         //uso de 'enum' para switch expressions
-        enum DiaDeLaSemana { //enum para valores fijos
+        enum DayOfWeek { //enum para valores fijos
             LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO
         }
 
-        DiaDeLaSemana dia = DiaDeLaSemana.MARTES;
+        DayOfWeek dia = DayOfWeek.MARTES;
 
         switch (dia) {
             case LUNES -> System.out.println("Lunes, haz lo mínimo");
@@ -45,12 +45,21 @@ public class Switch {
             case SABADO, DOMINGO -> System.out.println("Fin de semana");
         }
 
+        //devolver un valor o una cadena de texto directamente
+        System.out.println(
+                switch (dia) {
+                    case LUNES, MARTES, MIERCOLES -> "Inicio de semana";
+                    case JUEVES, VIERNES -> "Casi fin de semana";
+                    case SABADO, DOMINGO -> "Fin de semana";
+                }
+        );
+
         System.out.println("Tipo de día: " + dayType);
         System.out.println("El mes tiene " + dias + " días");
         System.out.println("Estación: " + getEstacion(day));
     }
 
-    //expresión switch en una función
+    //switch expressions en una función
     public static String getEstacion(int mes) {
         //estaciones según el mes
         return switch (mes) {
