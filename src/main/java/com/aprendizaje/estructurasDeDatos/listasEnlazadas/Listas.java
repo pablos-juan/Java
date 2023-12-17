@@ -15,7 +15,7 @@ public class Listas {
     }
 
     public void insertarPrincipio(Libro libro) {
-        //crear un nodo nuevo que conteanga un libro
+        //crear un nodo nuevo que contenga un libro
         Nodo nuevoNodo = new Nodo(libro);
         //configurar el puntero para que apunte
         //al nodo que es cabeza de la lista
@@ -47,7 +47,7 @@ public class Listas {
         }
     }
 
-    //insertar despues del libro en la posición n
+    //insertar después del libro en la posición n
     public void insertarDespues(int n, Libro libro) {
         Nodo nuevoNodo = new Nodo(libro);
         //comprobar si la lista está vacía
@@ -56,7 +56,7 @@ public class Listas {
             longitud++;
         } else {
             Nodo puntero = cabeza;
-            //contador indica la posicion del libro al que señala
+            //contador indica la posición del libro al que señala
             //el puntero
             int contador = 0;
             while (puntero.siguiente != null && contador < n) {
@@ -65,13 +65,13 @@ public class Listas {
             }
             //conectar el nuevo nodo con el nodo de la derecha
             nuevoNodo.siguiente = puntero.siguiente;
-            //connectar el nuevo nodo por la izquierda
+            //conectar el nuevo nodo por la izquierda
             puntero.siguiente = nuevoNodo;
             longitud++;
         }
     }
 
-    //obtener informacion
+    //obtener información
     public Libro obtenerLIbro(int n) {
         //comprobar si la lista está vacía
         if (cabeza == null) {
@@ -89,7 +89,7 @@ public class Listas {
     }
 
     public int getLongitud() {
-        //mucho mas eficiente que recorrer la lista
+        //mucho más eficiente que recorrer la lista
         return longitud;
     }
 
@@ -121,7 +121,6 @@ public class Listas {
             Nodo puntero = cabeza;
             //recorrer la lista hasta encontrar el penúltimo elemento
             //cuando siguiente del siguiente sea igual a null
-            // puntero -> ° -> null
             while (puntero.siguiente.siguiente != null) {
                 puntero = puntero.siguiente;
             }
@@ -151,8 +150,7 @@ public class Listas {
             //guarde el elemento a eliminar en un nodo temporal
             //en este caso es el siguiente del puntero
             Nodo temp = puntero.siguiente;
-            //asgine el siguiente del puntero al siguiente del nodo temporal
-            //puntero -> nodoEliminar -> nodo
+            //asigne el siguiente del puntero al siguiente del nodo temporal
             puntero.siguiente = temp.siguiente;
             //elimine el puntero del nodo temporal
             temp.siguiente = null;
