@@ -1,22 +1,21 @@
 package main.java.com.aprendizaje.estructurasDeDatos.listasEnlazadas;
 
-public class Listas {
-
+public class ListaEnlazada {
     private Nodo cabeza;
     private int longitud = 0;
 
     private class Nodo {
-        public Libro libro;
+        public String dato;
         public Nodo siguiente = null;
 
-        public Nodo(Libro libro) {
-            this.libro = libro;
+        public Nodo(String dato) {
+            this.dato = dato;
         }
     }
 
-    public void insertarPrincipio(Libro libro) {
+    public void insertarPrincipio(String dato) {
         //crear un nodo nuevo que contenga un libro
-        Nodo nuevoNodo = new Nodo(libro);
+        Nodo nuevoNodo = new Nodo(dato);
         //configurar el puntero para que apunte
         //al nodo que es cabeza de la lista
         nuevoNodo.siguiente = cabeza;
@@ -25,9 +24,9 @@ public class Listas {
         longitud++;
     }
 
-    public void insertarFinal(Libro libro) {
+    public void insertarFinal(String dato) {
         //crear nueva lista
-        Nodo nodoNuevo = new Nodo(libro);
+        Nodo nodoNuevo = new Nodo(dato);
         //verificar si la lista está vacía
         if (cabeza == null) {
             //si está vacía el nuevo nodo es ahora la cabeza
@@ -48,8 +47,8 @@ public class Listas {
     }
 
     //insertar después del libro en la posición n
-    public void insertarDespues(int n, Libro libro) {
-        Nodo nuevoNodo = new Nodo(libro);
+    public void insertarDespues(int posicion, String dato) {
+        Nodo nuevoNodo = new Nodo(dato);
         //comprobar si la lista está vacía
         if (cabeza == null) {
             cabeza = nuevoNodo;
@@ -59,7 +58,7 @@ public class Listas {
             //contador indica la posición del libro al que señala
             //el puntero
             int contador = 0;
-            while (puntero.siguiente != null && contador < n) {
+            while (puntero.siguiente != null && contador < posicion) {
                 puntero = puntero.siguiente;
                 contador++;
             }
@@ -72,7 +71,7 @@ public class Listas {
     }
 
     //obtener información
-    public Libro obtenerLIbro(int n) {
+    public String obtenerDato(int posicion) {
         //comprobar si la lista está vacía
         if (cabeza == null) {
             return null;
@@ -80,11 +79,11 @@ public class Listas {
             Nodo puntero = cabeza;
             int contador = 0;
             //recorrer la lista
-            while (contador < n && puntero.siguiente != null) {
+            while (contador < posicion && puntero.siguiente != null) {
                 puntero = puntero.siguiente;
             }
             //retornar el libro en la posición del puntero
-            return contador != n ? null : puntero.libro;
+            return contador != posicion ? null : puntero.dato;
         }
     }
 
@@ -130,9 +129,9 @@ public class Listas {
     }
 
     //eliminar un libro en la posición n
-    public void eliminarLibro(int n) {
-        if (cabeza == null || n >= longitud) return;
-        if (n == 0) {
+    public void eliminarLibro(int posicion) {
+        if (cabeza == null || posicion >= longitud) return;
+        if (posicion == 0) {
             //eliminarPrincipio();
             Nodo primerNodo = cabeza;
             cabeza = primerNodo.siguiente;
@@ -143,7 +142,7 @@ public class Listas {
             int contador = 0;
             //avanzar hasta encontrar el elemento anterior al que
             //debe eliminarse
-            while (puntero.siguiente != null && contador < (n - 1)) {
+            while (puntero.siguiente != null && contador < (posicion - 1)) {
                 puntero = puntero.siguiente;
                 contador++;
             }
