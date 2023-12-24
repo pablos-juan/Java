@@ -1,116 +1,33 @@
-# Arrays y colecciones
-En Java, los arrays y las colecciones son estructuras de datos que permiten almacenar y manipular conjuntos de elementos.
-## Arrays en Java
-Un array es una estructura de datos que permite almacenar múltiples valores del mismo tipo bajo un mismo nombre. Algunas características clave de los arrays en Java incluyen:
-- **Características:**
-	- Facilita el acceso a elementos específicos mediante índices.
-	- Permite la modificación directa de los valores de los elementos.
-	- Facilita la iteración mediante bucles for o foreach.
-1. **Declaración de Arrays:**
-```Java
-// Declaración e inicialización de un array de enteros
-int[] numeros = {1, 2, 3, 4, 5};
-```
-2. **Acceso a Elementos:**
-```Java
-// Acceso al tercer elemento del array
-int tercerNumero = numeros[2];
-```
-3. **Longitud del Array:**
-```Java
-// Obtener la longitud del array
-int longitud = numeros.length;
-```
-4. **Iteración a través de un Array:**
-```Java
-// Iteración a través de los elementos del array
-for (int i = 0; i < numeros.length; i++) {
-    System.out.println(numeros[i]);
-}
-```
-## Colecciones en Java
-Las colecciones en Java son objetos que pueden contener múltiples elementos. A diferencia de los arrays, las colecciones son dinámicas y pueden cambiar de tamaño durante la ejecución del programa. Algunas de las interfaces y clases principales en el marco de colecciones de Java son:
-### [[ArrayList]]
-- **Características:**
-	- Implementa la interfaz `List`.
-	- Dinámico y redimensionable.
-	- Permite agregar, eliminar y acceder a elementos eficientemente.
-- **Uso común:**
-	- Necesitas acceso rápido a elementos mediante índices.
-	- Realizas operaciones frecuentes de lectura y recorrido secuencial.
-	- El tamaño de la lista no cambia con frecuencia, y la mayoría de las operaciones son de lectura.
-- **Evitar cuando:**
-	- Necesitas realizar operaciones frecuentes de inserción o eliminación en posiciones intermedias de la lista.
-	- La lista puede cambiar con frecuencia y prefieres una estructura de datos dinámica.
-```Java
-ArrayList<String> listaNombres = new ArrayList<>();
-listaNombres.add("Juan");
-listaNombres.add("María");
-```
-### [[Listas enlazadas]]
-- **Características:**
-	- Implementa la interfaz `List`.
-	- Eficiente para la inserción y eliminación en el medio de la lista.
-	- Proporciona acceso secuencial.
-- **Uso común:**
-	- Realizas operaciones frecuentes de inserción y eliminación en posiciones intermedias de la lista.
-	- El redimensionamiento de las operaciones de inserción y eliminación es más crítico que el acceso por índice.
-- **Evitar cuando:**
-	- Necesitas acceso rápido a elementos mediante índices.
-	- Realizas principalmente operaciones de lectura y recorrido secuencial.
-```Java
-LinkedList<Integer> listaNumeros = new LinkedList<>();
-listaNumeros.add(1);
-listaNumeros.add(2);
-```
-### [[HashSet]]
-- **Características:**
-	- Implementa la interfaz `Set`.
-	- No permite elementos duplicados.
-	- Eficiente para la búsqueda y adición.
-- **Uso común:**
-	- Necesitas almacenar elementos únicos.
-	- Realizas operaciones frecuentes de búsqueda, inserción y eliminación de elementos únicos.
-	- No necesitas una asociación clave-valor.
-- **Evitar cuando:**
-	- Necesitas mantener un orden específico en los elementos.
-	- Quieres asociar valores específicos con los elementos almacenados.
-```Java
-LinkedList<Integer> listaNumeros = new LinkedList<>();
-listaNumeros.add(1);
-listaNumeros.add(2);
-```
-### [[HashMap]]
-- **Características:**
-	- Implementa la interfaz `Map`.
-	- Almacena pares clave-valor.
-	- Permite la búsqueda eficiente por clave.
-- **Uso común:**
-	- Necesitas asociar claves únicas con valores.
-	- Realizas operaciones frecuentes de búsqueda, inserción y eliminación basadas en claves.
-	- La relación entre claves y valor es esencial.
-- **Evitar cuando:**
-	- Es prescindible asociar clave-valor.
-	- Estás trabajando con tipos primitivos y no se requieren objetos clave.
-```Java
-HashMap<String, Integer> mapaEdades = new HashMap<>();
-mapaEdades.put("Juan", 25);
-mapaEdades.put("María", 30);
-```
-### Iteración a través de Colecciones
-```Java
-// Iteración a través de una lista
-for (String nombre : listaNombres) {
-    System.out.println(nombre);
-}
+# Estructuras de control
+#java #fundamentos 
+En Java, las estructuras de control son mecanismos que permiten modificar el flujo de ejecución de un programa. Estas estructuras son fundamentales para tomar decisiones, repetir acciones y controlar el flujo general de un programa. Las estructuras de control en Java incluyen:
 
-// Iteración a través de un conjunto
-for (String nombre : conjuntoNombres) {
-    System.out.println(nombre);
-}
-
-// Iteración a través de un mapa
-for (Map.Entry<String, Integer> entry : mapaEdades.entrySet()) {
-    System.out.println(entry.getKey() + ": " + entry.getValue());
-}
-```
+## Estructuras de decisión (condicionales)
+- **if:** Permite ejecutar un bloque de código si una condición es verdadera. 
+	- **`if`:** Es la palabra clave que inicia la estructura de control. Indica que se va a evaluar una condición y, si es verdadera, se ejecutará el bloque de código asociado.
+	- **`condición`:** Es una expresión `Boolean` que se evalúa como verdadera o falsa. Si la condición es verdadera, el bloque de código dentro del `if` se ejecutará. Si es falsa, el bloque de código se omitirá.
+	- **`{}` (bloque de código):** Encierra el conjunto de instrucciones que se ejecutarán si la condición es verdadera. Puede contener una o más declaraciones.
+- **else-if:** Permite evaluar múltiples condiciones en secuencia.
+	- **`else if`:** Esta es una extensión del `if` que se utiliza para evaluar una condición si todas las condiciones anteriores (precedentes) han sido falsas.
+	- **Bloques de código:** Cada bloque de código asociado a un `if` o `else if` se ejecutará si su condición correspondiente es verdadera.
+- **switch:** Permite seleccionar entre múltiples opciones. En java 12 fueron introducidos cambios en su sintaxis con la adición de las [[Switch expressions]].
+	- **`switch`:** Esta es la palabra clave que inicia la estructura de control. Se coloca seguida de la expresión que se evaluará.
+	- **`case`:** Cada `case` proporciona una opción específica que se comparará con el valor de la expresión. Si hay coincidencia, se ejecuta el bloque de código asociado al `case`. Si no hay coincidencia, se pasa al siguiente `case`.
+	- **`break`:** Es importante incluir `break` después de cada bloque de código asociado a un `case` para evitar que la ejecución continúe hacia los `case` siguientes. Si se omite el `break`, la ejecución continuará en los `case` siguientes aunque no haya coincidencia.
+	- **`default`:** Si ninguno de los `case` coincide con el valor de la expresión, se ejecuta el bloque de código asociado a `default`. No es obligatorio incluir `default`, pero es útil para manejar casos no previstos.
+## Estructuras de repetición (bucles) 
+- **for:** Permite ejecutar un bloque de código un número específico de veces mediante un índice. 
+	- **`for`:** La palabra clave que inicia la estructura de control. Se utiliza seguida de paréntesis que contienen tres partes: la inicialización, la condición de continuación y la expresión de actualización.
+	- **Inicialización (`int i = 1`):** Se ejecuta una vez al principio y se utiliza para declarar e inicializar la variable de iteración (`i` en este caso).
+	- **Condición de continuación (`i <= 5`):** Se evalúa antes de cada iteración. Si es verdadera, se ejecuta el bloque de código dentro del `for`; de lo contrario, se sale del bucle.
+	- **Expresión de actualización (`i++`):** Se ejecuta al final de cada iteración y generalmente se utiliza para incrementar o decrementar la variable de iteración (`i` en este caso).
+	- **Bloque de código (`{}`):** Contiene las instrucciones que se ejecutan en cada iteración del bucle.
+- **while:** Ejecuta un bloque de código mientras una condición sea verdadera.
+	- **`while`:** La palabra clave que inicia la estructura de control. Se utiliza seguida de una condición en paréntesis.
+	- **Condición (`i <= 5`):** Se evalúa antes de cada iteración. Si es verdadera, se ejecuta el bloque de código dentro del `while`; de lo contrario, se sale del bucle.
+	- **Bloque de código (`{}`):** Contiene las instrucciones que se ejecutan en cada iteración del bucle.
+- **do-while:** Similar a `while`, pero garantiza que el código se ejecutará al menos una vez antes de verificar la condición.
+	- **`do`:** La palabra clave que inicia la estructura de control `do-while`.
+	- **Bloque de código (`{}`):** Contiene las instrucciones que se ejecutan en cada iteración del bucle.
+	- **`while`:** La palabra clave que indica la condición que se evaluará después de ejecutar el bloque de código.
+	- **Condición (`i <= 5`):** Se evalúa después de cada iteración. Si es verdadera, el bucle se repetirá; de lo contrario, se sale del bucle.
