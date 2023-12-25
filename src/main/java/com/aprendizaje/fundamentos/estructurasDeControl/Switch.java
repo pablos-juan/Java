@@ -23,7 +23,10 @@ public class Switch {
             case 2 -> {
                 int year = getNumero(scanner);
                 //comprobar si es bisiesto
-                boolean esBisiesto = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+                boolean esBisiesto = (year % 4 == 0 && year % 100 != 0) 
+                                    || year % 400 == 0;
+                //expresión ternaria
+                //si es bisiesto el mes tiene 29 días, sino tiene 28
                 yield esBisiesto ? 29 : 28;
             }
             default -> 31;
