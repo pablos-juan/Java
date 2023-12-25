@@ -6,9 +6,11 @@ public class ConceptoHashMap {
     public static void main(String[] args) {
         //conjunto clave-valor
         HashMap<Integer, String> hash = new HashMap<>();
+        //agregar elementos
         hash.put(100, "juan");
         hash.put(300, "samuel");
         hash.put(400, "pablo");
+        //los elementos no tienen orden específico
         System.out.println(hash);
 
         //obtener un dato
@@ -25,10 +27,9 @@ public class ConceptoHashMap {
         } else System.out.println("No contiene el valor " + hash.get(400));
 
         //recorrer un hash
-        for (Integer indice : hash.keySet()) {
-            System.out.println(hash.get(indice));
-        }
-
+            // for (Integer indice : hash.keySet()) {
+            //     System.out.println(hash.get(indice));
+            // }
         //for-each en una expresión lambda
         hash.forEach((clave, valor) -> System.out.println(clave + ": " + valor));
     }
