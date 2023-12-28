@@ -13,82 +13,7 @@ public class ListaEnlazada {
         }
     }
 
-    public void insertarPrincipio(String dato) {
-        //crear un nodo nuevo que contenga un libro
-        Nodo nuevoNodo = new Nodo(dato);
-        //configurar el puntero para que apunte
-        //al nodo que es cabeza de la lista
-        nuevoNodo.siguiente = cabeza;
-        //asignar el nuevo nodo como cabeza
-        cabeza = nuevoNodo;
-        longitud++;
-    }
-
-    public void insertarFinal(String dato) {
-        //crear nueva lista
-        Nodo nodoNuevo = new Nodo(dato);
-        //verificar si la lista está vacía
-        if (cabeza == null) {
-            //si está vacía el nuevo nodo es ahora la cabeza
-            cabeza = nodoNuevo;
-            longitud++;
-        } else {
-            //nodo especial, inicializar en cabeza
-            Nodo puntero = cabeza;
-            //puntero avanza mientras el nodo siguiente no sea nulo
-            while (puntero.siguiente != null) {
-                puntero = puntero.siguiente;
-            }
-            //configurar puntero del último nodo para que ahora
-            //apunte al nuevo nodo
-            puntero.siguiente = nodoNuevo;
-            longitud++;
-        }
-    }
-
-    //insertar después del libro en la posición n
-    public void insertarDespues(int posicion, String dato) {
-        Nodo nuevoNodo = new Nodo(dato);
-        //comprobar si la lista está vacía
-        if (cabeza == null) {
-            cabeza = nuevoNodo;
-            longitud++;
-        } else {
-            Nodo puntero = cabeza;
-            //contador indica la posición del libro al que señala
-            //el puntero
-            int contador = 0;
-            while (puntero.siguiente != null && contador < posicion) {
-                puntero = puntero.siguiente;
-                contador++;
-            }
-            //conectar el nuevo nodo con el nodo de la derecha
-            nuevoNodo.siguiente = puntero.siguiente;
-            //conectar el nuevo nodo por la izquierda
-            puntero.siguiente = nuevoNodo;
-            longitud++;
-        }
-    }
-
-    //obtener información
-    public String obtenerDato(int posicion) {
-        //comprobar si la lista está vacía
-        if (cabeza == null) {
-            return null;
-        } else {
-            Nodo puntero = cabeza;
-            int contador = 0;
-            //recorrer la lista
-            while (contador < posicion && puntero.siguiente != null) {
-                puntero = puntero.siguiente;
-            }
-            //retornar el libro en la posición del puntero
-            return contador != posicion ? null : puntero.dato;
-        }
-    }
-
     public int getLongitud() {
-        //mucho más eficiente que recorrer la lista
         return longitud;
     }
 
@@ -96,16 +21,93 @@ public class ListaEnlazada {
         return cabeza == null;
     }
 
-    //eliminar el primer elemento de la lista
+    //* Insertar elementos
+    public void insertarPrincipio(String dato) {
+        /**
+         * * Crear y agregar un nodo nuevo:
+         * Crear un nodo nuevo y asignarle el dato
+         * El apuntador del nodo nuevo debe señalar la cabeza
+         * Además, el nodo nuevo debe asignarse como cabeza
+         */
+        Nodo nuevoNodo = new Nodo(dato);
+        nuevoNodo.siguiente = cabeza;
+        cabeza = nuevoNodo;
+        longitud++;
+    }
+
+    public void insertarFinal(String dato) {
+        Nodo nodoNuevo = new Nodo(dato);
+        if (cabeza == null) { // Comprobar si la lista está vacía
+            cabeza = nodoNuevo;
+            longitud++;
+        } else {
+            /**
+             * * Puntero es un nodo especial,
+             * señala el nodo actual
+             * Debe inicializarse en el nodo que encabeza la lista
+             */
+            Nodo puntero = cabeza;
+            while (puntero.siguiente != null) {
+                puntero = puntero.siguiente;
+            }
+            puntero.siguiente = nodoNuevo;
+            longitud++;
+        }
+    }
+
+    public void insertarDespues(int posicion, String dato) {
+        Nodo nuevoNodo = new Nodo(dato);
+        if (cabeza == null) { // Comprobar si la lista está vacía
+            cabeza = nuevoNodo;
+            longitud++;
+        } else {
+            Nodo puntero = cabeza;
+            int contador = 0; // Indica la posición del puntero
+            while (puntero.siguiente != null && contador < posicion) {
+                puntero = puntero.siguiente;
+                contador++;
+            }
+            /**
+             * * Reordenar los punteros del nuevo nodo:
+             * El apuntador del nuevo nodo debe señalar el
+             * nodo siguiente al nodo del puntero
+             * El apuntador del nodo actual (puntero) debe 
+             * dirigirse hacia el nuevo 
+             */
+            nuevoNodo.siguiente = puntero.siguiente;
+            puntero.siguiente = nuevoNodo;
+            longitud++;
+        }
+    }
+
+    public String obtenerElemento(int posicion) {
+        /**
+         * Comprobar si la lista está vacía
+         * Comprobar si la posición es válida
+         */
+        if (cabeza == null && posicion > longitud) {
+            return null;
+        } else {
+            Nodo puntero = cabeza;
+            int contador = 0;
+            while (contador < posicion && puntero.siguiente != null) {
+                puntero = puntero.siguiente;
+            }
+            return contador != posicion ? null : puntero.dato;
+        }
+    }
+
+    //* Eliminar elementos
     public void eliminarPrincipio() {
         if (cabeza != null) {
-            //crear un nodo para eliminar el puntero
-            //del primer nodo
+            /**
+             * * Reasignar la cabeza de la lista:
+             * Crear un nodo temporal que contenga el primer nodo
+             * La cabeza debe apuntar al nodo siguiente
+             * Remover el apuntador del primer nodo
+             */
             Nodo primerNodo = cabeza;
-            //reasignar la cabeza de la lista
             cabeza = cabeza.siguiente;
-            //reasignar el puntero siguiente de nodo a eliminar
-            //para que apunte a null
             primerNodo.siguiente = null;
             longitud--;
         }
@@ -113,13 +115,15 @@ public class ListaEnlazada {
 
     public void eliminarUltimo() {
         if (estaVacia()) return;
-        //si la lista solo tiene un elemento
+        // En caso de tener solo un elemento
         if (cabeza.siguiente == null) {
             cabeza = null;
         } else {
             Nodo puntero = cabeza;
-            //recorrer la lista hasta encontrar el penúltimo elemento
-            //cuando siguiente del siguiente sea igual a null
+            /**
+             * *Recorrer la lista hasta encontrar el penúltimo elemento
+             * Cuando el siguiente del siguiente del puntero esté vacío
+             */
             while (puntero.siguiente.siguiente != null) {
                 puntero = puntero.siguiente;
             }
@@ -128,11 +132,9 @@ public class ListaEnlazada {
         }
     }
 
-    //eliminar un libro en la posición n
-    public void eliminarLibro(int posicion) {
+    public void eliminarElemento(int posicion) {
         if (cabeza == null || posicion >= longitud) return;
-        if (posicion == 0) {
-            //eliminarPrincipio();
+        if (posicion == 0) { // Para eliminar el primer elemento
             Nodo primerNodo = cabeza;
             cabeza = primerNodo.siguiente;
             primerNodo.siguiente = null;
@@ -140,21 +142,31 @@ public class ListaEnlazada {
         } else {
             Nodo puntero = cabeza;
             int contador = 0;
-            //avanzar hasta encontrar el elemento anterior al que
-            //debe eliminarse
             while (puntero.siguiente != null && contador < (posicion - 1)) {
                 puntero = puntero.siguiente;
                 contador++;
             }
-            //guarde el elemento a eliminar en un nodo temporal
-            //en este caso es el siguiente del puntero
+            /**
+             * * Reasignar punteros:
+             * Poner el elemento a eliminar en un nodo temporal
+             * El siguiente del puntero, será redirigido
+             * hacia la propiedad siguiente del nodo temporal
+             * Eliminar el apuntador del nodo temporal
+             */
             Nodo temp = puntero.siguiente;
-            //asigne el siguiente del puntero al siguiente del nodo temporal
             puntero.siguiente = temp.siguiente;
-            //elimine el puntero del nodo temporal
             temp.siguiente = null;
-            //puntero -> nodo
             longitud--;
+        }
+    }
+
+    public void imprimirLista() {
+        if (cabeza != null) {
+            Nodo actual = cabeza;
+            while (actual != null) {
+                System.out.println(actual.dato);
+                actual = actual.siguiente;
+            }
         }
     }
 }

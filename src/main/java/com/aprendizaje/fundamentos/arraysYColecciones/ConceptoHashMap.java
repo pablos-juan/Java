@@ -4,33 +4,40 @@ import java.util.HashMap;
 
 public class ConceptoHashMap {
     public static void main(String[] args) {
-        //conjunto clave-valor
+        /**
+         * * Crear HashMap:
+         * Conjunto clave-valor
+         * Añadir tipo de clave y tipo de valor entre genéricos
+         */
         HashMap<Integer, String> hash = new HashMap<>();
-        //agregar elementos
+
+        //* Agregar elementos
         hash.put(100, "juan");
         hash.put(300, "samuel");
         hash.put(400, "pablo");
-        //los elementos no tienen orden específico
         System.out.println(hash);
 
-        //obtener un dato
-        System.out.println("dato en la clave 300: " + hash.get(300));
+        //* Obtener un dato
+        System.out.println("Dato en la clave 300: " + hash.get(300));
 
-        //remover un dato
+        //* Eliminar un dato
         hash.remove(100);
         System.out.println("juan removido");
         System.out.println(hash);
 
-        //contiene una clave
+        //* Comprobar si una clave existe dentro de un mapa
         if (hash.containsKey(400)) {
             System.out.println("Contiene un valor " + hash.get(400));
         } else System.out.println("No contiene el valor " + hash.get(400));
 
-        //recorrer un hash
-            // for (Integer indice : hash.keySet()) {
-            //     System.out.println(hash.get(indice));
-            // }
-        //for-each en una expresión lambda
+        /**
+         * * Recorrer un HashMap
+         * Recorrer el mapa e imprimir los elementos con for-each
+         *      for (Integer indice : hash.keySet()) {
+         *          System.out.println(hash.get(indice));
+         *      }
+         * Expresión lambda para forEach
+         */
         hash.forEach((clave, valor) -> System.out.println(clave + ": " + valor));
     }
 }

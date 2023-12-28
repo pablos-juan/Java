@@ -7,10 +7,14 @@ import java.util.LinkedHashSet;
 
 public class ConceptoHashSet {
     public static void main(String[] args) {
-        //conjunto HashSet
+        //* Definir tipo en genéricos
         Set<String> conjuntoHash = new HashSet<>();;
 
-        //agregar elementos
+        /**
+         * * Agregar elementos:
+         * HashSet no permite valores duplicados,
+         * en caso de haber alguno será ignorado
+         */
         conjuntoHash.add("juan");
         conjuntoHash.add("pablo");
         conjuntoHash.add("samuel");
@@ -21,11 +25,16 @@ public class ConceptoHashSet {
                 HashSet:
                 ---------""");
 
-        //recorrer conjunto hash con for-each en una expresión lambda
+        //* Recorrer conjunto con forEach en lambda
         conjuntoHash.forEach(x -> System.out.println(x));
 
-        //conjunto TreeHashSet
+        //* Conjunto TreeSet
         Set<String> conjuntoTree = new TreeSet<>();
+        /**
+         * * Orden de los elementos:
+         * TreeSet ordena los elementos alfabéticamente
+         * Los números están ordenados de menor a mayor
+         */
         conjuntoTree.add("sara");
         conjuntoTree.add("camila");
         conjuntoTree.add("pedro");
@@ -35,11 +44,11 @@ public class ConceptoHashSet {
                 TreeSet:
                 ---------""");
         
-        //TreeSet imprimirá los valores en orden alfabético
         conjuntoTree.forEach(x -> System.out.println(x));
 
-        //conjunto LinkedHashSet
+        //* Conjunto LinkedHashSet
         Set<Character> conjuntoLinked = new LinkedHashSet<>();
+        //* Los valores será insertados según la inserción
         conjuntoLinked.add('v');
         conjuntoLinked.add('r');
         conjuntoLinked.add('b');
@@ -49,25 +58,23 @@ public class ConceptoHashSet {
                 LinkedHashSet:
                 ----------------""");
 
-        //LinkedHasSet imprimirá los valores según el orden de inserción
-        //no hay valores duplicados
         conjuntoLinked.forEach(x -> System.out.println(x));
 
-        //OPERACIONES CON HASH SET
-        //eliminar elementos
+        //* Operaciones con HashSet
+        // Eliminar elementos
         conjuntoHash.remove("pablo");
         System.out.println("pablo fué removido del conjunto");
 
-        //verificar existencia de un elemento
+        // Verificar existencia de un elemento
         if (conjuntoHash.contains("pablo")) {
             System.out.println("pablo está en el conjunto");
         } else System.out.println("pablo no está en el conjunto");
 
-        //eliminar todos los elementos
+        // Eliminar todos los elementos
         conjuntoHash.clear();
         System.out.println("Todos los elementos fueron eliminados");
 
-        //comprobar si el conjunto está vacío
+        // Comprobar si el conjunto está vacío
         if (conjuntoHash.isEmpty()) System.out.println("El conjunto está vacío");
     }
 }

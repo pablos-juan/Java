@@ -8,32 +8,27 @@ public class Switch {
         Scanner scanner = new Scanner(System.in);
         int day = getNumero(scanner);
 
-        //expresiones switch (desde Java 12)
+        //* Switch expressions (desde Java 12)
         String dayType = switch (day) {
             case 1, 2, 3, 4, 5 -> "Laborable";
             case 6, 7 -> "Fin de semana";
-            default -> throw new IllegalArgumentException("Día no válido: " + day);
+            default -> throw new IllegalArgumentException("Día no válido: ");
         };
 
-        //bloques de código y 'yield' en switch expressions
+        //* Yield y bloques de código en switch expressions
         int mes = getNumero(scanner);
         int dias = switch (mes) {
-            //cuántos días tiene cada mes
             case 4, 6, 9, 11 -> 30;
             case 2 -> {
                 int year = getNumero(scanner);
-                //comprobar si es bisiesto
-                boolean esBisiesto = (year % 4 == 0 && year % 100 != 0) 
-                                    || year % 400 == 0;
-                //expresión ternaria
-                //si es bisiesto el mes tiene 29 días, sino tiene 28
-                yield esBisiesto ? 29 : 28;
+                // Expresión ternaria para yield
+                yield esBisiesto(year) ? 29 : 28;
             }
             default -> 31;
         };
 
-        //uso de 'enum' para switch expressions
-        enum DayOfWeek { //enum para valores fijos
+        //* Uso de enum para switch expressions
+        enum DayOfWeek { // Enum para valores fijos
             LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO
         }
 
@@ -42,13 +37,13 @@ public class Switch {
         switch (dia) {
             case LUNES -> System.out.println("Lunes, haz lo mínimo");
             case MARTES -> System.out.println("Martes, tómalo con calma");
-            case MIERCOLES -> System.out.println("Miércoles, mejor no matarse");
+            case MIERCOLES -> System.out.println("Miércoles mejor no matarse");
             case JUEVES -> System.out.println("Jueves para la joda");
             case VIERNES -> System.out.println("Día de salud mental");
             case SABADO, DOMINGO -> System.out.println("Fin de semana");
         }
 
-        //devolver un valor o una cadena de texto directamente
+        //* Imprimir una cadena de texto con switch expressions
         System.out.println(
                 switch (dia) {
                     case LUNES, MARTES, MIERCOLES -> "Inicio de semana";
@@ -62,9 +57,12 @@ public class Switch {
         System.out.println("Estación: " + getEstacion(day));
     }
 
-    //switch expressions en una función
+    public static boolean esBisiesto(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+    }
+
+    //* Switch expressions para funciones
     public static String getEstacion(int mes) {
-        //estaciones según el mes
         return switch (mes) {
             case 12, 1, 2 -> "Invierno";
             case 3, 4, 5 -> "Primavera";

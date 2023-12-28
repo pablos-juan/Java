@@ -9,24 +9,25 @@ public class Condicionales {
         Scanner scanner = new Scanner(System.in);
         int edad = getNumero(scanner);
 
-        //condicional simple
         String tipoPersona = validarEdad(edad);
 
-        //operadores ternarios
-        //TipoDeDato = condición ? valor_si_verdadero : valor_si_falso
+        /**
+         * * Operadores ternarios
+         * TipoDeDato = condición ? valor_si_verdadero : valor_si_falso
+         */
         String mensaje = (edad % 2 == 0) ? "Es par" : "Es impar";
 
-        //operadores ternarios junto a expresiones lambda
-        Function<Integer, String> clasificarNumero = n -> (n % 2 == 0) ? "Par" : "Impar";
+        //* Operadores ternarios junto a expresiones lambda
+        Function<Integer, String> clasificarNumero = 
+                n -> (n % 2 == 0) ? "Par" : "Impar";
 
         System.out.println(edad + ": " +mensaje);
         System.out.println("Es par: " + clasificarNumero);
         System.out.println("Tipo de persona: " + tipoPersona);
     }
 
-    //condicionales en una función
+    //* Condicionales en una función
     public static String validarEdad(int edad) {
-        //ciclo if clásico
         if (edad < 18) {
             return "Eres menor de edad";
         } else if (edad < 65) {

@@ -6,41 +6,42 @@ import java.util.Collections;
 
 public class ConceptoArrayList {
     public static void main(String[] args) {
-        //indicar tipo entre genéricos
+        //* Indique el tipo de datos entre genéricos
         List<String> numberList = new ArrayList<>();
         
-        //agregar elementos
+        //* Agregar elementos
         numberList.add("pablo");
         numberList.add("juan");
         numberList.add("samuel");
         numberList.add("camilo");
 
-        //recorrer lista con for-each e imprimir los elementos
-            /*
-                for (Integer numero : numberList) {
-                    System.out.println(numero)
-                }
-            */
-        //for-each en una expresión lambda
+        /**
+         * * Recorrer una lista:
+         * Recorrer la lista e imprimir los elemento con for-each
+         *      for (Integer numero : numberList) {
+         *          System.out.println(numero)
+         *      }
+         * Expresión lambda para forEach
+         */
         numberList.forEach(x -> System.out.println(x));
 
-        //eliminar un elemento
-        numberList.remove(2); //2 es la posición
+        //* Eliminar un elemento, indicar posición
+        numberList.remove(2);
         System.out.println("Elemento en la posición 2 removido");
 
-        //tamaño de la lista
+        //* Obtener tamaño de la lista
         System.out.println("Tamaño: " + numberList.size());
         
-        //obtener un elemento según un índice
+        //* Obtener un elemento según su posición
         System.out.println("Elemento en índice 1: " 
                             + numberList.get(1));
         
-        //obtener la posición de un elemento
+        //* Obtener la posición de un elemento
         System.out.println("Posición del elemento pablo: " 
-                        //en caso de no encontrar el elemento retorna -1
+                        // En caso de no encontrar el objeto, retornará -1
                             + numberList.indexOf("pablo"));
         
-        //elemento máximo y mínimo
+        //* Obtener elemento máximo y mínimo
         System.out.println("Máximo: " + Collections.max(numberList));
         System.out.println("Mínimo: " + Collections.min(numberList));
     }
