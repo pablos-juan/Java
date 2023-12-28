@@ -1,4 +1,4 @@
-package main.java.com.aprendizaje.fundamentos.estructurasDeControl;
+package main.java.com.aprendizaje.expresionesLambda;
 
 import java.util.ArrayList;
 import java.util.Arrays;
