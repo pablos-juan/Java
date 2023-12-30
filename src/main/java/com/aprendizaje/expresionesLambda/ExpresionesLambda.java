@@ -15,6 +15,7 @@ public class ExpresionesLambda {
         System.out.println("IMPRIMIR NÚMEROS CON LAMBDA:");
         numeros.forEach(numero -> System.out.println(numero + " "));
 
+        separador();
         // Lambda junto a método referencial para println
         System.out.println("REFERENCIA A MÉTODOS:");
         Arrays.asList(1, 2, 3, 4, 5, 6).forEach(System.out::println);
@@ -28,18 +29,21 @@ public class ExpresionesLambda {
         ArrayList<Integer> mayoresQue = new ArrayList<>(numeros
                 .stream()
                 .filter(n -> n > 5)
-                .toList());
+                .toList()
+        );
 
-        System.out.println("FILTRADOS: MAYORES QUE 5");
+        separador();
+        System.out.println("FILTER: mayores que 5");
         mayoresQue.forEach(System.out::println);
 
         /**
-         * * Mapeo:
+         * * Mapeo: map
          * Encontrar el cuadrado perfecto de cada elemento -> map
          * Filtrar los datos mayores que 5 y menores que 30 -> filter
          * Mostrar todos los datos filtrados -> forEach
          */
-        System.out.println("MAPEO: CUADRADOS PERFECTOS");
+        separador();
+        System.out.println("MAP: cuadrados perfectos");
         numeros.stream()
                 .map(x -> x * x)
                 .filter(x -> x > 5 && x <= 30)
@@ -47,24 +51,74 @@ public class ExpresionesLambda {
                 .forEach(System.out::println);
 
         /**
-         * * Ordenación:
+         * * Ordenación: sorted
          * Ordenar los números de la lista de mayor a menor -> sorted
          * Usar Interfaz comparator para definir el criterio -> Comparator
          * Mostrar los datos
          * Comparator<Integer> ordenDescendente = Comparator.reverseOrder();
          */
-
-        System.out.println("SORT: ORDENACIÓN DE MAYOR A MENOR");
+        separador("SORT");
+        System.out.println("SORT: ordenar de mayor a menor");
         numeros.stream()
                 .sorted(Comparator.reverseOrder())
-                .forEach(System.out::println);
+                .forEach(System.out::println
+        );
 
-        System.out.println("ORDENAR CADENAS SEGÚN SU LONGITUD");
+        separador();
+        System.out.println("SORT: ordenar cadenas según su longitud");
         ArrayList<String> nombres = new ArrayList<>(List.of(
                 "Samuel", "Juan", "Pablo", "Camila", "Spotify"
         ));
         nombres.stream()
                 .sorted(Comparator.comparingInt(String::length).reversed())
                 .forEach(System.out::println);
+
+        /**
+         * * Coincidencia: anyMatch
+         * Si al menos uno de los elementos cumple con una condición
+         * retorna true, de lo contrario retorna false
+         */
+        boolean contieneJ = nombres.stream()
+                .anyMatch(nombre -> nombre.toLowerCase().contains("i"));
+        separador("MATCH");
+        System.out.println(
+                        "ANY. Algún nombre contiene 'J': " + contieneJ
+        );
+
+        /**
+         * * Coincidencia: allMatch
+         * Si todos lo elementos de la lista cumplen con una condición
+         * retorna true, de lo contrario retorna false
+         */
+        boolean iniciaConP = nombres.stream()
+                .allMatch(nombre -> nombre.toLowerCase().startsWith("p"));
+        separador();
+        System.out.println(
+                        "ALL. Todos los nombres inician en 'P': " + iniciaConP
+        );
+
+        /**
+         * * Coincidencia: noneMatch
+         * Si ninguno de los elementos cumple con una condición
+         * retorna true, de lo contrario retorna false
+         */
+        boolean noTerminaEnE = nombres.stream()
+                .noneMatch(nombre -> nombre.toLowerCase().endsWith("e"));
+        separador();
+        System.out.println(
+                        "NONE. Ningún nombre termina en 'E': " + noTerminaEnE
+        );
+    }
+
+    public static void separador() {
+        System.out.println(
+                "--------------------------------------------------"
+        );
+    }
+
+    public static void separador(String extra) {
+        System.out.println(
+                "-------------------------------------------------- " + extra 
+        );
     }
 }
