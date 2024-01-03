@@ -67,7 +67,7 @@ public class ExpresionesLambda {
         separador();
         System.out.println("SORT: ordenar cadenas según su longitud");
         ArrayList<String> nombres = new ArrayList<>(List.of(
-                "Samuel", "Juan", "Pablo", "Camila", "Spotify"
+                "Samuel", "Juan", "Pablo", "Camila", "Adriana"
         ));
         nombres.stream()
                 .sorted(Comparator.comparingInt(String::length).reversed())
@@ -108,6 +108,58 @@ public class ExpresionesLambda {
         System.out.println(
                         "NONE. Ningún nombre termina en 'E': " + noTerminaEnE
         );
+        
+        /**
+         * * Omitir elementos: skip
+         * Omite los primeros n elementos
+         * siendo n de tipo longs
+         */
+        int n = 2;
+        List<String> elementosOmitidos = nombres.stream()
+                .skip(n)
+                .toList();
+        separador("SKIP");
+        System.out.println("SKIP: omitir los 2 primeros elementos");
+        elementosOmitidos.forEach(System.out::println);
+
+        /**
+         * * Limitar elementos: limit
+         * Limita el flujo hasta un máximo de n elementos
+         * siendo n de tipo long
+         */
+        separador();
+        int limite = 3;
+        List<String> listaLimitada = nombres.stream()
+                .limit(limite)
+                .toList();
+        System.out.println("SKIP: limita el flujo a 3 elementos");
+        listaLimitada.forEach(System.out::println);
+
+        /**
+         * * Ejemplo paginación con limit y skip:
+         * pageNumber define el elemento que iniciará la página
+         * pageSize será el máximo de elementos en una página
+         * Cada página tendrá dos elementos
+         */
+        separador();
+        System.out.println("PAGINACIÓN: limit y skip");
+        int pageNumber = 0;
+        int pageSize = 5;
+        /**
+         * El producto de pageNumber * pageSize resulta en el número
+         * de elementos que ya fueron incluidos en un página
+         * El ciclo se detendrá cuando todos lo elementos estén dentro
+         * Los elementos serán agregados cuando el producto de
+         * pageNumber * pageSize sea mayor o igual al tamaño de la lista
+         */
+        while (pageNumber * pageSize < nombres.size()) {
+                nombres.stream()
+                        .skip(pageNumber * pageSize)
+                        .limit(pageSize)
+                        .forEach(System.out::println);
+                pageNumber++;
+                System.out.println("-------------");
+        }
     }
 
     public static void separador() {
