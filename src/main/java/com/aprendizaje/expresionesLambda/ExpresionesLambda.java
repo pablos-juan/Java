@@ -1,6 +1,10 @@
 package main.java.com.aprendizaje.expresionesLambda;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import javax.swing.text.html.HTMLDocument.BlockElement;
 
 public class ExpresionesLambda {
     public static void main(String[] args) {
@@ -118,7 +122,7 @@ public class ExpresionesLambda {
         List<String> elementosOmitidos = nombres.stream()
                 .skip(n)
                 .toList();
-        separador("SKIP");
+        separador();
         System.out.println("SKIP: omitir los 2 primeros elementos");
         elementosOmitidos.forEach(System.out::println);
 
@@ -132,7 +136,7 @@ public class ExpresionesLambda {
         List<String> listaLimitada = nombres.stream()
                 .limit(limite)
                 .toList();
-        System.out.println("SKIP: limita el flujo a 3 elementos");
+        System.out.println("LIMIT: limita el flujo a 3 elementos");
         listaLimitada.forEach(System.out::println);
 
         /**
@@ -144,7 +148,7 @@ public class ExpresionesLambda {
         separador();
         System.out.println("PAGINACIÓN: limit y skip");
         int pageNumber = 0;
-        int pageSize = 5;
+        int pageSize = 2;
         /**
          * El producto de pageNumber * pageSize resulta en el número
          * de elementos que ya fueron incluidos en un página
@@ -158,8 +162,57 @@ public class ExpresionesLambda {
                         .limit(pageSize)
                         .forEach(System.out::println);
                 pageNumber++;
-                System.out.println("-------------");
+                System.out.println("------------- p:" + pageNumber);
         }
+
+        /**
+         * * Collectors: groupingBy
+         * Agrupa los elementos según el criterio impuesto
+         * Retorna un mapa, su clave es el parámetro por el que se agrupa
+         * su valor es una lista, que contienen los elementos que cumplen
+         * con ese criterio de agrupación
+         */
+        Map<Integer, List<String>> mapaLongitud = nombres.stream()
+                .collect(Collectors.groupingBy(String::length));
+        separador("COLLECTORS");
+        System.out.println("COLLECTORS, groupingBy: agrupar los nombres según su longitud");
+        mapaLongitud.forEach((clave, valor) -> System.out.println(
+                "Longitud: " + clave + ", Coincidencia: " + valor
+        ));
+
+        /**
+         * * Collectors: counting
+         * Defina un criterio para la recolección por ejemplo,
+         * las palabras terminadas en en la letra "a"
+         * Dado que solo hay dos casos posibles (true o false)
+         * el mapa mostrará las coincidencias para cada una
+         * Collectors.counting determina el número de coincidencias
+         */
+        Map<Object, Long> countingMap = nombres.stream()
+                .collect(Collectors.groupingBy(
+                        m -> m.endsWith("a"), Collectors.counting()
+                ));
+        separador();
+        System.out.println("COLLECTORS, counting: nombres que terminan en 'a'");
+        countingMap.forEach((clave, valor) -> System.out.println(
+                clave + ": " + valor
+        ));
+
+        /**
+         * * Collectors: summing
+         * Agrupar palabras por su longitud
+         * Sumar las longitudes de las palabras en los grupos
+         */
+        Map<Integer, Integer> summingMap = nombres.stream()
+                .collect(Collectors.groupingBy(
+                        String::length,
+                        Collectors.summingInt(String::length)
+                ));
+        separador();
+        System.out.println("COLLECTORS, summing: palabras agrupadas por longitud");
+        summingMap.forEach((clave, valor) -> System.out.println(
+                "Longitud: " + clave + ", longitud total: " + valor
+        ));
     }
 
     public static void separador() {
