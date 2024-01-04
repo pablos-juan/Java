@@ -1,10 +1,7 @@
 package main.java.com.aprendizaje.expresionesLambda;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import javax.swing.text.html.HTMLDocument.BlockElement;
 
 public class ExpresionesLambda {
     public static void main(String[] args) {
@@ -213,6 +210,19 @@ public class ExpresionesLambda {
         summingMap.forEach((clave, valor) -> System.out.println(
                 "Longitud: " + clave + ", longitud total: " + valor
         ));
+
+        /**
+         * * Reduce:
+         * Combina los elementos de un flujo en un solo resultado
+         * Reduce devuelve un optional
+         */
+        separador();
+        System.out.println("REDUCE: suma de longitudes" + "\nTotal: " +
+                nombres.stream()
+                .map(m -> m.length())
+                .reduce(Integer::sum)
+                .orElse(0)
+        );
     }
 
     public static void separador() {
