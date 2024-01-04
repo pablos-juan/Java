@@ -219,7 +219,7 @@ public class ExpresionesLambda {
         separador();
         System.out.println("REDUCE: suma de longitudes" + "\nTotal: " +
                 nombres.stream()
-                .map(m -> m.length())
+                .map(String::length)
                 .reduce(Integer::sum)
                 .orElse(0)
         );
