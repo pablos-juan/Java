@@ -35,7 +35,7 @@ public class ExpresionesLambda {
                 .toList()
         );
 
-        System.out.println("FILTER: mayores que 5");
+        System.out.println("FILTER: Mayores que 5");
         mayoresQue.forEach(System.out::println);
         separador();
 
@@ -45,7 +45,7 @@ public class ExpresionesLambda {
          * Filtrar los datos mayores que 5 y menores que 30 -> filter
          * Mostrar todos los datos filtrados -> forEach
          */
-        System.out.println("MAP: cuadrados perfectos");
+        System.out.println("MAP: Cuadrados perfectos");
         numeros.stream()
                 .map(x -> x * x)
                 .filter(x -> x > 5 && x <= 30)
@@ -60,14 +60,14 @@ public class ExpresionesLambda {
          * Mostrar los datos
          * Comparator<Integer> ordenDescendente = Comparator.reverseOrder();
          */
-        System.out.println("SORT: ordenar de mayor a menor");
+        System.out.println("SORT: Ordenar de mayor a menor");
         numeros.stream()
                 .sorted(Comparator.reverseOrder())
                 .forEach(System.out::println
         );
         separador();
 
-        System.out.println("SORT: ordenar cadenas según su longitud");
+        System.out.println("SORT: Ordenar cadenas según su longitud");
         ArrayList<String> nombres = new ArrayList<>(List.of(
                 "Samuel", "Juan", "Pablo", "Camila", "Adriana"
         ));
@@ -121,7 +121,7 @@ public class ExpresionesLambda {
         List<String> elementosOmitidos = nombres.stream()
                 .skip(n)
                 .toList();
-        System.out.println("SKIP: omitir los 2 primeros elementos");
+        System.out.println("SKIP: Omitir los 2 primeros elementos");
         elementosOmitidos.forEach(System.out::println);
         separador();
 
@@ -134,7 +134,7 @@ public class ExpresionesLambda {
         List<String> listaLimitada = nombres.stream()
                 .limit(limite)
                 .toList();
-        System.out.println("LIMIT: limita el flujo a 3 elementos");
+        System.out.println("LIMIT: Limita el flujo a 3 elementos");
         listaLimitada.forEach(System.out::println);
         separador();
 
@@ -144,7 +144,7 @@ public class ExpresionesLambda {
          * pageSize será el máximo de elementos en una página
          * Cada página tendrá dos elementos
          */
-        System.out.println("PAGINACIÓN: limit y skip");
+        System.out.println("PAGINACIÓN: Limit y skip");
         int pageNumber = 0;
         int pageSize = 2;
         /**
@@ -173,7 +173,7 @@ public class ExpresionesLambda {
          */
         Map<Integer, List<String>> mapaLongitud = nombres.stream()
                 .collect(Collectors.groupingBy(String::length));
-        System.out.println("COLLECTORS, groupingBy: agrupar los nombres según su longitud");
+        System.out.println("COLLECTORS, groupingBy: Agrupar los nombres según su longitud");
         mapaLongitud.forEach((clave, valor) -> System.out.println(
                 "Longitud: " + clave + ", Coincidencia: " + valor
         ));
@@ -191,7 +191,7 @@ public class ExpresionesLambda {
                 .collect(Collectors.groupingBy(
                         m -> m.endsWith("a"), Collectors.counting()
                 ));
-        System.out.println("COLLECTORS, counting: nombres que terminan en 'a'");
+        System.out.println("COLLECTORS, counting: Nombres que terminan en 'a'");
         countingMap.forEach((clave, valor) -> System.out.println(
                 clave + ": " + valor
         ));
@@ -207,7 +207,7 @@ public class ExpresionesLambda {
                         String::length,
                         Collectors.summingInt(String::length)
                 ));
-        System.out.println("COLLECTORS, summing: palabras agrupadas por longitud");
+        System.out.println("COLLECTORS, summing: Palabras agrupadas por longitud");
         summingMap.forEach((clave, valor) -> System.out.println(
                 "Longitud: " + clave + ", longitud total: " + valor
         ));
@@ -218,7 +218,7 @@ public class ExpresionesLambda {
          * Combina los elementos de un flujo en un solo resultado
          * Reduce devuelve un optional
          */
-        System.out.println("REDUCE: suma de longitudes" + "\nTotal: " +
+        System.out.println("REDUCE: Suma de longitudes" + "\nTotal: " +
                 nombres.stream()
                 .map(String::length)
                 .reduce(Integer::sum)
@@ -235,7 +235,7 @@ public class ExpresionesLambda {
          */
         String concatenacion = nombres.stream()
                 .map(m -> m.concat(" "))
-                .reduce("REDUCE: nombres concatenados: ", (a, b) -> a + b);
+                .reduce("REDUCE. Nombres concatenados: ", (a, b) -> a + b);
         System.out.println(concatenacion);
         separador();
 
@@ -257,7 +257,7 @@ public class ExpresionesLambda {
                 .filter(esValido)
                 .findFirst()
                 .orElse(null);
-        System.out.println("findFISRT: primera coincidencia: " + findFirst);
+        System.out.println("findFISRT: Primera coincidencia: " + findFirst);
     }
 
     public static void separador() {
