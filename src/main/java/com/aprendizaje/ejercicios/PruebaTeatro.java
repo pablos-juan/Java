@@ -1,4 +1,4 @@
-package main.java.com.aprendizaje.ejerciciosPruebasTecnicas;
+package main.java.com.aprendizaje.ejercicios;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
