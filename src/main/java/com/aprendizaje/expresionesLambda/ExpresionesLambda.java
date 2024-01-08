@@ -1,6 +1,7 @@
 package main.java.com.aprendizaje.expresionesLambda;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ExpresionesLambda {
@@ -234,8 +235,29 @@ public class ExpresionesLambda {
          */
         String concatenacion = nombres.stream()
                 .map(m -> m.concat(" "))
-                .reduce("Nombres concatenados: ", (a, b) -> a + b);
+                .reduce("REDUCE: nombres concatenados: ", (a, b) -> a + b);
         System.out.println(concatenacion);
+        separador();
+
+        /**
+         * * Buscar un elemento: findFirst
+         * Usa predicate, devuelve un optional
+         * FindFirst devuelve el primer elemento que coincida con
+         * la condición impuesta en forma de predicate
+         * Predicate puede ser agregado directamente el método
+         * filter o declarado previamente
+         */
+        Predicate<String> longitudMax = nombre -> nombre.length()<7;
+        Predicate<String> longitudMin = nombre -> nombre.length()>3;
+        Predicate<String> contieneA = nombre -> nombre.contains("a");
+        Predicate<String> esValido = longitudMax.and(longitudMin).and(contieneA);
+
+        String findFirst = nombres.stream()
+                .map(String::toLowerCase)
+                .filter(esValido)
+                .findFirst()
+                .orElse(null);
+        System.out.println("findFISRT: primera coincidencia: " + findFirst);
     }
 
     public static void separador() {
