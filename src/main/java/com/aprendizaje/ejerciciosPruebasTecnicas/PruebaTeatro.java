@@ -26,7 +26,7 @@ public class PruebaTeatro {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("RESERVAR UN ASIENTO:");
+                    System.out.println("RESERVAR UN ASIENTO:");
                     asignarAsiento(teatro, scanner);
                     separador();
                     break;
