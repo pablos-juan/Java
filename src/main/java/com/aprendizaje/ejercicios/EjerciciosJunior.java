@@ -1,8 +1,10 @@
 package main.java.com.aprendizaje.ejercicios;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -36,21 +38,59 @@ public class EjerciciosJunior {
         separador();
 
         System.out.println("ORDEN ALEATORIO DE UNA PALABRA: " + CADENA_PRUEBA);
-        System.out.println(randomOrder(CADENA_PRUEBA));
+        randomOrder(CADENA_PRUEBA);
+        separador();
+
+        System.out.println("REMUEVE DUPLICADOS DE LA LISTA:");
+        listaSinDuplicados(Arrays.asList(1, 2, 3, 1, 2, 5, 6, 4, 3, 9, 6));
+        separador();
+
+        System.out.println("COMPROBAR SI UNA CADENA TIENE VOCALES: " + CADENA_PRUEBA);
+        hayVocales(CADENA_PRUEBA);
+        separador();
+
+        System.out.println("COMPROBAR SI UNA CADENA ES PALÍNDROMO: " + CADENA_PRUEBA);
+        esPalindromo(CADENA_PRUEBA);
         separador();
     }
 
-    /**
-     * Reordenar caracteres de una cadena aleatoriamente
-     * @param cadena provee los caracteres
-     * @return nueva cadena con caracteres ordenados aleatoriamente
-     */
-    public static String randomOrder(String cadena) {
+    public static void esPalindromo(String cadena) {
+        String reversed = new StringBuilder(cadena).reverse().toString();
+        boolean esPalindromo = reversed.equals(cadena);
+        System.out.println(esPalindromo ? cadena + " es un palíndromo"
+                                        : cadena + " no es un palíndromo");
+    }
+
+    public static void hayVocales(String cadena) {
+        boolean hayVocales = cadena.toLowerCase().matches(".*[aeiou].*");
+        System.out.println(hayVocales);
+
+        /* final String VOCALES = "aeiouAEIOU";
+
+        for (char c : cadena.toCharArray()) {
+            if (VOCALES.contains(String.valueOf(c))) {
+                return true;
+            }
+        }
+        return false; */
+    }
+
+    public static void listaSinDuplicados(List<Integer> lista) {
+        Set<Integer> newLista = new HashSet<>(lista);
+        newLista.forEach(System.out::println);
+    }
+
+    public static void randomOrder(String cadena) {
+        /* String[] array = cadena.split("");
+        List<String> list = Arrays.asList(array);
+        Collections.shuffle(list);
+
+        list.forEach(System.out::println); */
         final int LONGITUD = cadena.length();
 
         Set<Integer> numbers = new HashSet<>();
-        char[] solution = new char[LONGITUD];
         char[] newCadena = cadena.toCharArray();
+        char[] solution = new char[LONGITUD];
 
         Random random = new Random();
 
@@ -61,14 +101,10 @@ public class EjerciciosJunior {
             } while (!numbers.add(num));
             solution[i] = newCadena[num];
         }
-
-        return new String(solution);
+        //return new String(solution);
+        System.out.println(solution);
     }
 
-    /**
-     * Determina si el año es bisiesto
-     * @param year año a evaluar
-     */
     public static void isLeapYear(int year) {
         System.out.println(
                 LocalDate.of(year, 1, 1).isLeapYear()
@@ -97,10 +133,6 @@ public class EjerciciosJunior {
         });
     }
 
-    /**
-     * Cuenta la frecuencia con la que aparece cada caracter
-     * @param cadena de aquí saldrán los caracteres
-     */
     public static void contadorCaracteres(String cadena) {
         Map<Character, Integer> conteo = new HashMap<>();
         for (char c : cadena.toCharArray()) {
