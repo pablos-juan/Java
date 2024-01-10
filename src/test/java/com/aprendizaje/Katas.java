@@ -2,6 +2,7 @@ package test.java.com.aprendizaje;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Katas {
 
@@ -10,7 +11,7 @@ public class Katas {
          * invertir una cadena de texto
          *  String solution = "";
          *  for(int i=str.length()-1; i>=0; i--){
-         *  solution += str.charAt(i);
+         *      solution += str.charAt(i);
          *  }
          *  return solution;
         */
@@ -161,6 +162,7 @@ public class Katas {
         //elemento) en una parada de autobús.
         //Su tarea es devolver la cantidad de personas que todavía están en el autobús después
         //de la última parada (después de la última matriz).
+        System.out.println(stops);
         return stops.stream().mapToInt(x -> x[0] - x[1]).sum();
     }
 
@@ -214,10 +216,13 @@ public class Katas {
         } else return -1;
     }
 
-    public static int[] countBy(int x, int n){
-        //cree una funcion que agregue a un arreglo un numero x que aumenta con tasa de x + x
+    public static int[] countBy(int valorInicial, int longitud){
+        //cree una función que agregue a un arreglo un numero x 
+        //que aumenta con tasa de x + x
         //la longitud del arreglo esta dada por n
-        return java.util.stream.IntStream.iterate(x, i -> i + x).limit(n).toArray();
+        return IntStream.iterate(valorInicial, y -> valorInicial + y)
+                    .limit(longitud)
+                    .toArray();
     }
 
     public static void main(String[] args) {
