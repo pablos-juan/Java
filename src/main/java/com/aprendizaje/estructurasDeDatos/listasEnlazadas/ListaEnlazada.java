@@ -161,12 +161,12 @@ public class ListaEnlazada {
     }
 
     public void imprimirLista() {
-        if (cabeza != null) {
-            Nodo actual = cabeza;
-            while (actual != null) {
-                System.out.println(actual.dato);
-                actual = actual.siguiente;
-            }
+        if (cabeza == null) return;
+
+        Nodo actual = cabeza;
+        while (actual != null) {
+            System.out.println(actual.dato);
+            actual = actual.siguiente;
         }
     }
 }
