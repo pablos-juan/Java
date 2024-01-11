@@ -46,11 +46,11 @@ public class ListaEnlazada {
              * señala el nodo actual
              * Debe inicializarse en el nodo que encabeza la lista
              */
-            Nodo puntero = cabeza;
-            while (puntero.siguiente != null) {
-                puntero = puntero.siguiente;
+            Nodo actual = cabeza;
+            while (actual.siguiente != null) {
+                actual = actual.siguiente;
             }
-            puntero.siguiente = nodoNuevo;
+            actual.siguiente = nodoNuevo;
             longitud++;
         }
     }
@@ -61,21 +61,21 @@ public class ListaEnlazada {
             cabeza = nuevoNodo;
             longitud++;
         } else {
-            Nodo puntero = cabeza;
-            int contador = 0; // Indica la posición del puntero
-            while (puntero.siguiente != null && contador < posicion) {
-                puntero = puntero.siguiente;
+            Nodo actual = cabeza;
+            int contador = 0; // Indica la posición del actual
+            while (actual.siguiente != null && contador < posicion) {
+                actual = actual.siguiente;
                 contador++;
             }
             /**
              * * Reordenar los punteros del nuevo nodo:
              * El apuntador del nuevo nodo debe señalar el
-             * nodo siguiente al nodo del puntero
-             * El apuntador del nodo actual (puntero) debe 
+             * nodo siguiente al nodo del actual
+             * El apuntador del nodo actual (actual) debe
              * dirigirse hacia el nuevo 
              */
-            nuevoNodo.siguiente = puntero.siguiente;
-            puntero.siguiente = nuevoNodo;
+            nuevoNodo.siguiente = actual.siguiente;
+            actual.siguiente = nuevoNodo;
             longitud++;
         }
     }
@@ -88,12 +88,12 @@ public class ListaEnlazada {
         if (cabeza == null && posicion > longitud) {
             return null;
         } else {
-            Nodo puntero = cabeza;
+            Nodo actual = cabeza;
             int contador = 0;
-            while (contador < posicion && puntero.siguiente != null) {
-                puntero = puntero.siguiente;
+            while (contador < posicion && actual.siguiente != null) {
+                actual = actual.siguiente;
             }
-            return contador != posicion ? null : puntero.dato;
+            return contador != posicion ? null : actual.dato;
         }
     }
 
@@ -119,15 +119,15 @@ public class ListaEnlazada {
         if (cabeza.siguiente == null) {
             cabeza = null;
         } else {
-            Nodo puntero = cabeza;
+            Nodo actual = cabeza;
             /**
              * *Recorrer la lista hasta encontrar el penúltimo elemento
-             * Cuando el siguiente del siguiente del puntero esté vacío
+             * Cuando el siguiente del siguiente del actual esté vacío
              */
-            while (puntero.siguiente.siguiente != null) {
-                puntero = puntero.siguiente;
+            while (actual.siguiente.siguiente != null) {
+                actual = actual.siguiente;
             }
-            puntero.siguiente = null;
+            actual.siguiente = null;
             longitud--;
         }
     }
@@ -140,10 +140,10 @@ public class ListaEnlazada {
             primerNodo.siguiente = null;
             longitud--;
         } else {
-            Nodo puntero = cabeza;
+            Nodo actual = cabeza;
             int contador = 0;
-            while (puntero.siguiente != null && contador < (posicion - 1)) {
-                puntero = puntero.siguiente;
+            while (actual.siguiente != null && contador < (posicion - 1)) {
+                actual = actual.siguiente;
                 contador++;
             }
             /**
@@ -153,8 +153,8 @@ public class ListaEnlazada {
              * hacia la propiedad siguiente del nodo temporal
              * Eliminar el apuntador del nodo temporal
              */
-            Nodo temp = puntero.siguiente;
-            puntero.siguiente = temp.siguiente;
+            Nodo temp = actual.siguiente;
+            actual.siguiente = temp.siguiente;
             temp.siguiente = null;
             longitud--;
         }
