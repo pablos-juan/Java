@@ -62,10 +62,10 @@ public class ListaEnlazada {
             longitud++;
         } else {
             Nodo actual = cabeza;
-            int contador = 0; // Indica la posición del actual
-            while (actual.siguiente != null && contador < posicion) {
+            int index = 0; // Indica la posición del actual
+            while (actual.siguiente != null && index < posicion) {
                 actual = actual.siguiente;
-                contador++;
+                index++;
             }
             /**
              * * Reordenar los punteros del nuevo nodo:
@@ -85,16 +85,15 @@ public class ListaEnlazada {
          * Comprobar si la lista está vacía
          * Comprobar si la posición es válida
          */
-        if (cabeza == null && posicion > longitud) {
+        if (cabeza == null || posicion > longitud) {
             return null;
-        } else {
-            Nodo actual = cabeza;
-            int contador = 0;
-            while (contador < posicion && actual.siguiente != null) {
-                actual = actual.siguiente;
-            }
-            return contador != posicion ? null : actual.dato;
         }
+        Nodo actual = cabeza;
+        int index = 0;
+        while (actual.siguiente != null && index < posicion) {
+            actual = actual.siguiente;
+        }
+        return index != posicion ? null : actual.dato;
     }
 
     //* Eliminar elementos
@@ -133,7 +132,7 @@ public class ListaEnlazada {
     }
 
     public void eliminarElemento(int posicion) {
-        if (cabeza == null || posicion >= longitud) return;
+        if (cabeza == null || posicion > longitud) return;
         if (posicion == 0) { // Para eliminar el primer elemento
             Nodo primerNodo = cabeza;
             cabeza = primerNodo.siguiente;
@@ -141,10 +140,10 @@ public class ListaEnlazada {
             longitud--;
         } else {
             Nodo actual = cabeza;
-            int contador = 0;
-            while (actual.siguiente != null && contador < (posicion - 1)) {
+            int index = 1;
+            while (actual.siguiente != null && index < posicion) {
                 actual = actual.siguiente;
-                contador++;
+                index++;
             }
             /**
              * * Reasignar punteros:
@@ -153,9 +152,9 @@ public class ListaEnlazada {
              * hacia la propiedad siguiente del nodo temporal
              * Eliminar el apuntador del nodo temporal
              */
-            Nodo temp = actual.siguiente;
-            actual.siguiente = temp.siguiente;
-            temp.siguiente = null;
+            Nodo temporal = actual.siguiente;
+            actual.siguiente = temporal.siguiente;
+            temporal.siguiente = null;
             longitud--;
         }
     }
