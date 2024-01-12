@@ -23,7 +23,7 @@ public class Cola {
     public void encolar(String dato) {
         Nodo nuevoNodo = new Nodo(dato);
         /**
-         * Comprobar si la cola esta vacía
+         * Comprobar si la cola está vacía
          * Si lo está, apuntar la cabeza hacia el nodo nuevo
          * Si no está vacía, agregar el elemento nuevo
          * después del último nodo
@@ -45,18 +45,19 @@ public class Cola {
         /**
          * Comprobar si la cola no está vacía
          * Si no lo está, usar un nodo temporal que señale el primer
-         * elemento de la lista (cabeza) y eliminar su apuntador
+         * elemento de la cola (cabeza) y eliminar su apuntador
          * Mueva la cabeza hacia el siguiente elemento de la cola
          */
-        if (cabeza != null) return;
+        if (cabeza == null) return;
         Nodo temporal = cabeza;
         temporal.siguiente = null;
         cabeza = cabeza.siguiente;
 
         if (longitud == 0) {
-            // Si la lista está vacía, el último nodo debe esta vacío también
+            // Si la cola está vacía, el último nodo debe está vacío también
             ultimo = null;
         }
+        longitud--;
     }
 
     /**
