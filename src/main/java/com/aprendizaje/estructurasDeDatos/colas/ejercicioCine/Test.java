@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Test {
     public static void main(String[] args) {
-        ColaCine cola = new ColaCine();
+        ColaCine<Persona> cola = new ColaCine<>();
         int dineroRecaudado = 0;
 
         System.out.println("----CINE----");
@@ -47,7 +47,7 @@ public class Test {
      * Agrega personas a la cola
      * @param cola Aquí se añadirán las personas
      */
-    public static void llenarCola(ColaCine cola) {
+    public static void llenarCola(ColaCine<Persona> cola) {
         Random random = new Random();
         final int TOTAL_PERSONAS = random.nextInt(50);
 

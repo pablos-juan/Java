@@ -1,22 +1,22 @@
 package main.java.com.aprendizaje.estructurasDeDatos.listasEnlazadas.ejercicioBiblioteca;
 
-public class Nodo {
-    private final Libro libro;
-    private Nodo siguiente = null;
+public class Nodo<T> {
+    private final T elemento;
+    private Nodo<T> siguiente = null;
 
-    public Nodo(Libro libro) {
-        this.libro = libro;
+    public Nodo(T elemento) {
+        this.elemento = elemento;
     }
 
-    public Libro getLibro() {
-        return libro;
+    public T getElemento() {
+        return elemento;
     }
 
-    public Nodo getSiguiente() {
+    public Nodo<T> getSiguiente() {
         return siguiente;
     }
 
-    public void setSiguiente(Nodo siguiente) {
+    public void setSiguiente(Nodo<T> siguiente) {
         this.siguiente = siguiente;
     }
 }

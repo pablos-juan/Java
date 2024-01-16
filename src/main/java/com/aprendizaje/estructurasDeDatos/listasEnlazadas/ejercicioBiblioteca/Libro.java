@@ -11,10 +11,6 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public int getIsbn() {
-        return isbn;
-    }
-
     @Override
     public String toString() {
         return String.format("{%s, %s, %d}", titulo, autor, isbn);

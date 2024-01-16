@@ -1,7 +1,7 @@
 package main.java.com.aprendizaje.estructurasDeDatos.listasEnlazadas.ejercicioBiblioteca;
 
-public class Biblioteca {
-    private Nodo cabeza;
+public class Biblioteca<T> {
+    private Nodo<T> cabeza;
     private int longitud = 0;
     private final static String NO_DELETED_BOOK = "Error. Operación cancelada";
     private final static String DELETED_BOOK = "Libro eliminado";
@@ -15,13 +15,13 @@ public class Biblioteca {
             return;
         }
 
-        Nodo actual = cabeza;
+        Nodo<T> actual = cabeza;
         int index = 1;
         while (actual.getSiguiente() != null && index < position-1) {
             actual = actual.getSiguiente();
             position++;
         }
-        Nodo temporal = actual.getSiguiente();
+        Nodo<T> temporal = actual.getSiguiente();
         actual.setSiguiente(temporal.getSiguiente());
         temporal.setSiguiente(null);
         longitud--;
@@ -38,7 +38,7 @@ public class Biblioteca {
             System.out.println(DELETED_BOOK);
         }
 
-        Nodo actual = cabeza;
+        Nodo<T> actual = cabeza;
         while (actual.getSiguiente().getSiguiente() != null) {
             actual = actual.getSiguiente();
         }
@@ -53,7 +53,7 @@ public class Biblioteca {
             return;
         }
 
-        Nodo temporal = cabeza;
+        Nodo<T> temporal = cabeza;
         cabeza = cabeza.getSiguiente();
         temporal.setSiguiente(null);
         longitud--;
@@ -61,14 +61,14 @@ public class Biblioteca {
 
     }
 
-    public void addEnd(Libro libro) {
+    public void addEnd(T elemento) {
         if (cabeza == null) {
-            add(libro);
+            add(elemento);
             return;
         }
 
-        Nodo nuevoNuevo = new Nodo(libro);
-        Nodo actual = cabeza;
+        Nodo<T> nuevoNuevo = new Nodo<>(elemento);
+        Nodo<T> actual = cabeza;
         while (actual.getSiguiente() != null) {
             actual = actual.getSiguiente();
         }
@@ -76,70 +76,65 @@ public class Biblioteca {
         longitud++;
     }
 
-    public void addAfter(Libro libro, int position) {
+    public void addAfter(T elemento, int position) {
         if (cabeza == null) {
-            add(libro);
+            add(elemento);
             return;
         }
 
-        Nodo nuevoNodo = new Nodo(libro);
-        Nodo actual = cabeza;
+        Nodo<T> nuevoNodo = new Nodo<>(elemento);
+        Nodo<T> actual = cabeza;
         int index = 1;
+
         while (actual.getSiguiente() != null && index < position) {
             actual = actual.getSiguiente();
             index++;
         }
+
         nuevoNodo.setSiguiente(actual.getSiguiente());
         actual.setSiguiente(nuevoNodo);
         longitud++;
     }
 
-    public void add(Libro libro) {
-        Nodo nodoNuevo = new Nodo(libro);
+    public void add(T elemento) {
+        Nodo<T> nodoNuevo = new Nodo<>(elemento);
         nodoNuevo.setSiguiente(cabeza);
         cabeza = nodoNuevo;
         longitud++;
     }
 
-    public void printList() {
-        if (cabeza == null) return;
+    @Override
+    public String toString() {
+        Nodo<T> actual = cabeza;
+        StringBuilder retorno = new StringBuilder("{");
 
-        Nodo actual = cabeza;
         while (actual != null) {
-            System.out.println(actual.getLibro());
+            retorno.append(actual.getElemento());
+
+            if (actual.getSiguiente() == null) {
+                retorno.append("}");
+            } else {
+                retorno.append("\n");
+            }
             actual = actual.getSiguiente();
         }
+
+        return retorno.toString();
     }
 
-    public Libro getWithIsbn(int isbn) {
-        if (cabeza == null) {
-            return null;
-        }
-
-        Nodo actual = cabeza;
-        while (actual.getSiguiente() != null && !comprobarLibro(actual, isbn)) {
-            actual = actual.getSiguiente();
-        }
-        return comprobarLibro(actual, isbn) ? actual.getLibro() : null;
-    }
-
-    private boolean comprobarLibro(Nodo nodo, int isbn) {
-        return nodo.getLibro().getIsbn() == isbn;
-    }
-
-    public Libro getLibro(int position) {
+    public T getElemento(int position) {
         if (cabeza == null || longitud < position) {
             return null;
         }
 
-        Nodo actual = cabeza;
+        Nodo<T> actual = cabeza;
         int index = 1;
         while (actual.getSiguiente() != null && index < position){
             actual = actual.getSiguiente();
             index++;
         }
 
-        return index != position ? null : actual.getLibro();
+        return index != position ? null : actual.getElemento();
     }
 
     public int length() {

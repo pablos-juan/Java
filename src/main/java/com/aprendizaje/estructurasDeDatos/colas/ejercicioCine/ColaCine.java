@@ -1,22 +1,22 @@
 package main.java.com.aprendizaje.estructurasDeDatos.colas.ejercicioCine;
 
-public class ColaCine {
+public class ColaCine<T> {
 
-    private class Nodo {
-        public Persona persona;
-        public Nodo siguiente = null;
+    private class Nodo<T> {
+        public T elemento;
+        public Nodo<T> siguiente = null;
 
-        public Nodo(Persona persona) {
-            this.persona = persona;
+        public Nodo(T elemento) {
+            this.elemento = elemento;
         }
     }
 
-    private Nodo cabeza;
-    private Nodo ultimo;
+    private Nodo<T> cabeza;
+    private Nodo<T> ultimo;
     private int longitud;
 
-    public void encolar(Persona persona) {
-        Nodo nuevoNodo = new Nodo(persona);
+    public void encolar(T elemento) {
+        Nodo<T> nuevoNodo = new Nodo<>(elemento);
 
         if (cabeza == null) {
             cabeza = nuevoNodo;
@@ -31,7 +31,7 @@ public class ColaCine {
     private void eliminar() {
         if (cabeza == null) return;
 
-        Nodo temporal = cabeza;
+        Nodo<T> temporal = cabeza;
         cabeza = cabeza.siguiente;
         temporal.siguiente = null;
 
@@ -42,13 +42,13 @@ public class ColaCine {
         longitud--;
     }
 
-    public Persona getPersona() {
+    public T getPersona() {
         if (cabeza == null) {
             return null;
         }
-        Nodo temporal = cabeza;
+        Nodo<T> temporal = cabeza;
         eliminar();
-        return temporal.persona;
+        return temporal.elemento;
     }
 
     public void print() {
@@ -57,11 +57,29 @@ public class ColaCine {
             return;
         }
 
-        Nodo actual = cabeza;
+        Nodo<T> actual = cabeza;
         while (actual.siguiente == null) {
-            System.out.println(cabeza.persona);
+            System.out.println(cabeza.elemento);
             actual = actual.siguiente;
         }
+    }
+
+    @Override
+    public String toString() {
+        Nodo<T> actual = cabeza;
+        StringBuilder retorno = new StringBuilder("{");
+
+        while (actual != null) {
+            retorno.append(actual.elemento);
+            if (actual.siguiente == null) {
+                retorno.append("}");
+            } else {
+                retorno.append(", ");
+            }
+            actual = actual.siguiente;
+        }
+
+        return retorno.toString();
     }
 
     public boolean isEmpty() {

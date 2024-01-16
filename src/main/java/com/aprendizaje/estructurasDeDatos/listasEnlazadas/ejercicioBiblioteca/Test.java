@@ -2,7 +2,7 @@ package main.java.com.aprendizaje.estructurasDeDatos.listasEnlazadas.ejercicioBi
 
 public class Test {
     public static void main(String[] args) {
-        Biblioteca miBiblioteca = new Biblioteca();
+        Biblioteca<Libro> miBiblioteca = new Biblioteca<>();
 
         miBiblioteca.add(new Libro("El capital", "Karl Marx", 1));
         miBiblioteca.add(new Libro("El resplandor", "Stephen King", 2));
@@ -11,10 +11,10 @@ public class Test {
         miBiblioteca.add(new Libro("El alquimista", "Pablo Coelho", 5));
         
         System.out.println("\nLIBROS EN LA BIBLIOTECA: " + miBiblioteca.length());
-        miBiblioteca.printList();
+        System.out.println(miBiblioteca);
         separador();
 
-        Libro miLibro = miBiblioteca.getLibro(3);
+        Libro miLibro = miBiblioteca.getElemento(3);
         System.out.println("LIBRO EN LA POSICIÓN 3: " + miLibro);
         separador();
 
@@ -29,12 +29,8 @@ public class Test {
         System.out.println("ELIMINAR LIBRO EN LA POSICIÓN 2:");
         miBiblioteca.deleteIn(2);
 
-        miBiblioteca.printList();
+        System.out.println(miBiblioteca);
         separador();
-
-        System.out.println("OBTENER LIBRO CON ISBN:");
-        Libro mm = miBiblioteca.getWithIsbn(3);
-        System.out.println(mm);
     }
 
     public static void separador() {
