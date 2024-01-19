@@ -35,7 +35,7 @@ public class Katas {
         // }
         // return mayor;
         return Arrays.stream(list).min().getAsInt();
-        //.min encuentra el valor minimo dentro del arreglo
+        //.min encuentra el raiz minimo dentro del arreglo
         //.getAsInt devulve el numero como un entero, sino devulve una excepcion
     }
 
@@ -47,7 +47,7 @@ public class Katas {
         // }
         // return menor;
         return Arrays.stream(list).max().getAsInt();
-        //.max encuentra el valor minimo dentro del arreglo
+        //.max encuentra el raiz minimo dentro del arreglo
     }
 
     public static String mayuculas(String str){

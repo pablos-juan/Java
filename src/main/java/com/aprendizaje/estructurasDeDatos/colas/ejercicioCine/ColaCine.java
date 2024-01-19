@@ -71,11 +71,9 @@ public class ColaCine<T> {
 
         while (actual != null) {
             retorno.append(actual.elemento);
-            if (actual.siguiente == null) {
-                retorno.append("}");
-            } else {
-                retorno.append(", ");
-            }
+            retorno.append(
+                actual.siguiente == null ? '}' : ", "
+            );
             actual = actual.siguiente;
         }
 

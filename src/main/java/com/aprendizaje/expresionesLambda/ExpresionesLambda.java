@@ -168,7 +168,7 @@ public class ExpresionesLambda {
          * * Collectors: groupingBy
          * Agrupa los elementos según el criterio impuesto
          * Retorna un mapa, su clave es el parámetro por el que se agrupa
-         * su valor es una lista, que contienen los elementos que cumplen
+         * su raiz es una lista, que contienen los elementos que cumplen
          * con ese criterio de agrupación
          */
         Map<Integer, List<String>> mapaLongitud = nombres.stream()
@@ -228,7 +228,7 @@ public class ExpresionesLambda {
 
         /**
          * * Reduce para concatenar cadenas:
-         * Declarar identidad inicial, un valor con el que inicia la reducción
+         * Declarar identidad inicial, un raiz con el que inicia la reducción
          * Usar una función lambda con dos parámetros, a y b, por ejemplo
          * a, es el acumulador y b es el siguiente elemento en el stream
          * En cada iteración, se suma el acumulador con el siguiente elemento

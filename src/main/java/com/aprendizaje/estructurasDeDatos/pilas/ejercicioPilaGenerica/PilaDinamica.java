@@ -35,13 +35,9 @@ public class PilaDinamica<T> {
 
         while (actual != null) {
             retorno.append(actual.getElemento());
-
-            if (actual.getSiguiente() == null){
-                retorno.append("}");
-            } else {
-                retorno.append(", ");
-            }
-
+            retorno.append(
+                actual.getSiguiente() == null ? '}' : ", "
+            );
             actual = actual.getSiguiente();
         }
 

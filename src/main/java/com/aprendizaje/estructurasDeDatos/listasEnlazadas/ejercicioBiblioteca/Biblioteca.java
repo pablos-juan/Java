@@ -110,12 +110,9 @@ public class Biblioteca<T> {
 
         while (actual != null) {
             retorno.append(actual.getElemento());
-
-            if (actual.getSiguiente() == null) {
-                retorno.append("}");
-            } else {
-                retorno.append("\n");
-            }
+            retorno.append(
+                actual.getSiguiente() == null ? '}' : "\n"
+            );
             actual = actual.getSiguiente();
         }
 

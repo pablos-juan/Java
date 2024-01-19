@@ -6,8 +6,8 @@ public class ConceptoHashMap {
     public static void main(String[] args) {
         /**
          * * Crear HashMap:
-         * Conjunto clave-valor
-         * Añadir tipo de clave y tipo de valor entre genéricos
+         * Conjunto clave-raiz
+         * Añadir tipo de clave y tipo de raiz entre genéricos
          */
         HashMap<Integer, String> hash = new HashMap<>();
 
@@ -25,10 +25,10 @@ public class ConceptoHashMap {
         System.out.println("juan removido");
         System.out.println(hash);
 
-        //* Comprobar si una clave existe dentro de un mapa
+        //* Comprobar si una clave isPresent dentro de un mapa
         if (hash.containsKey(400)) {
-            System.out.println("Contiene un valor " + hash.get(400));
-        } else System.out.println("No contiene el valor " + hash.get(400));
+            System.out.println("Contiene un raiz " + hash.get(400));
+        } else System.out.println("No contiene el raiz " + hash.get(400));
 
         /**
          * * Recorrer un HashMap
